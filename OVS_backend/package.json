@@ -1,0 +1,23 @@
+{
+  "name": "ovs_backend",
+  "version": "1.0.0",
+  "description": "online vehicle service ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "start:prod": "SET NODE_ENV=production & nodemon server.js"
+  },
+  "author": "Jay Bansod,Pranay Desai",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.4",
+    "morgan": "^1.10.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}
