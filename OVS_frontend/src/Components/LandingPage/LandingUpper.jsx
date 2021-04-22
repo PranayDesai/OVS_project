@@ -21,10 +21,13 @@ import CarService from "../../Pics and logo/LandingPage/CarService.jpg";
 import fastSupport from "../../Pics and logo/LandingPage/fastSupport.jpg";
 import minimalCharges from "../../Pics and logo/LandingPage/minimalCharges.jpg";
 import bestMechanics from "../../Pics and logo/LandingPage/bestMechanics.jpg";
+import Button from '@material-ui/core/Button';
+import {Link} from 'react-router-dom';
 
 class LandingUpper extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       data: [],
       visible: false,
@@ -62,6 +65,7 @@ class LandingUpper extends Component {
         var area = temp[0];
         temp.shift();
         var place_name = temp.join(", ");
+        
 
         const Coordinates = {
           lat,
@@ -77,24 +81,13 @@ class LandingUpper extends Component {
   };
 
   goTo = () => {
-    this.props.history.push("/Restaurants");
+    this.props.history.push("/Restaurent");
   };
 
-  render() {
-    return (
-      <>
-        <Div className="container-fluid">
-          <div className="row">
-            <div className="col-lg-6 col-md-4  ml-auto">
-              {/* LOGO */}
-              <InnerDiv className="container">
-                <div className="row ">
-                  <div className="col-1 mr-auto align-self-start">
-                    {/* <Logo
-                                            src={websiteLogo }
-                                            alt='ovs logo'
-                                        /> */}
-                  </div>
+  getButtons=()=>{
+    
+    this.dataLocalStorage === null ?
+                  <div>
                   <div
                     className="col-lg-2 btn btn-lg align-self-center font-weight-bold "
                     style={{ textAlign: "right" }}
@@ -111,6 +104,26 @@ class LandingUpper extends Component {
                   >
                     <RegisterDrawer />
                   </div>
+                  </div>
+                  : 
+                  <Link exact to="/my-account">
+                    <Button variant="outlined">{ this.dataLocalStorage.name}</Button>
+                  </Link>
+  }
+
+  render() {
+    return (
+      <>
+        <Div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-6 col-md-4  ml-auto">
+              {/* LOGO */}
+              <InnerDiv className="container">
+                <div className="row ">
+                  <div className="col-1 mr-auto align-self-start">
+                    <Logo src={websiteLogo} alt="ovs logo" />
+                  </div>
+                  {this.getButtons()}
                 </div>
               </InnerDiv>
 

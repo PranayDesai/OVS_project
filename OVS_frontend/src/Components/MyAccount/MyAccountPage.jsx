@@ -57,10 +57,11 @@ const Edit = styled.button`
 `;
 
 const MyAccountPage = () => {
-    const [data, setData] = useState({});
+    /* const [data, setData] = useState({}); */
     const id = JSON.parse(localStorage.getItem('customerData'))._id;
-
-    useEffect(() => {
+    const data =JSON.parse(localStorage.getItem('customerData'));
+    console.log(data);
+    /* useEffect(() => {
         var config = {
             method: 'get',
             url: `http://localhost:5000/api/customer/order/${id}`,
@@ -76,14 +77,14 @@ const MyAccountPage = () => {
                 console.log(error.response.data);
             });
     }, []);
-    console.log(data);
+    console.log(data); */
     return (
         <>
             <MyAccNavigator />
             <Wrapper>
                 <div className='container-fluid' style={{ width: '90%' }}>
-                    <div className='row row-cols-1'>
-                        <Title className='col row-cols-1'>
+                    <div className='row '>
+                        <Title className='col-lg-12'>
                             <div className='row'>
                                 <div className='col'>
                                     <div className='col text-left text-capitalize'>
@@ -97,7 +98,7 @@ const MyAccountPage = () => {
                                             fontWeight: 300,
                                         }}
                                     >
-                                        {data.phoneNumber}{' '}
+                                        {data.phonenumber}{' '}
                                         <span
                                             className='align-items-end mb-2 mr-3 ml-3'
                                             style={{
@@ -128,7 +129,7 @@ const MyAccountPage = () => {
                     </div>
                 </div>
             </Wrapper>
-            <MainFooter />
+            {/* <MainFooter /> */}
         </>
     );
 };
