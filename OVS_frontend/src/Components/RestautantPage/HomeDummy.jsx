@@ -104,7 +104,7 @@ function HomeDummy() {
     const getData = (filter) => {
         var config = {
             method: 'get',
-            url: `${process.env.REACT_APP_API_URL}/api/restaurant?lat=12.9259&lng=77.6229&filter=${filter}&page=1&limit=5`,
+            url: `${process.env.REACT_APP_API_URL}/api/restaurant?lat=22.9259&lng=7.6229&filter=${filter}&page=1&limit=5`,
             headers: {},
         };
 
@@ -156,7 +156,7 @@ function HomeDummy() {
                                         <div className='col-9 text-left content'>
                                             <p>Top Picks</p>
                                             <small>
-                                                {totalTopPicks} OPTIONS
+                                                {/* {totalTopPicks} */} OPTIONS
                                             </small>
                                         </div>
                                     </div>
