@@ -90,10 +90,7 @@ class LandingUpper extends Component {
               <InnerDiv className="container">
                 <div className="row ">
                   <div className="col-1 mr-auto align-self-start">
-                    {/* <Logo
-                                            src={websiteLogo }
-                                            alt='ovs logo'
-                                        /> */}
+                    <Logo src={websiteLogo} alt="ovs logo" />
                   </div>
                   <div
                     className="col-lg-2 btn btn-lg align-self-center font-weight-bold "
