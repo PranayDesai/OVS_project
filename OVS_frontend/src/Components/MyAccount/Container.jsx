@@ -31,23 +31,22 @@ const Title = styled.p`
     line-height: 1.5rem;
 `;
 
-const Icon = styled.img`
-   /*  // border: 1px solid red; */
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    margin-right: 20px;
-    margin-left: 10px;
-  /*   // margin-bottom: 10px; */
-    &:hover {
-        transform: scale(1.2);
-    }
+const Icon = styled.i`
+cursor: pointer;
+width: 30px;
+height: 30px;
+margin-right: 20px;
+margin-left: 10px;
+font-size:2rem;
+&:hover {
+    transform: scale(1.2);
+}
 `;
 
 const Container = () => {
     const [data, setData] = useState({});
 
-    useEffect(() => {
+   /*  useEffect(() => {
         const id = JSON.parse(localStorage.getItem('customerData'))._id;
         var config = {
             method: 'get',
@@ -64,13 +63,13 @@ const Container = () => {
                 console.log(error.response.data);
             });
     }, []);
-    console.log(data);
+    console.log(data); */
     return (
         <Wrapper>
             <div className='container-fluid p-5' style={{ width: '94%' }}>
                 <div className='row'>
                     <div
-                        className='col row-cols-1 text-left pt-4 pb-4 pl-4 pr-0 text-capitalize'
+                        className='col-12 text-left pt-4 pb-4 pl-4 pr-0 text-capitalize'
                         style={{
                             background: '#edf1f7',
                             maxWidth: '280px',
@@ -88,7 +87,7 @@ const Container = () => {
                                     color: '#171a29',
                                 }}
                             >
-                                <Icon src='Icons/orders.svg' alt='orders' />
+                                <Icon className="fas fa-wrench"  />
                                 orders
                             </Title>
                         </div>
@@ -96,8 +95,7 @@ const Container = () => {
                             <Title>
                                 {' '}
                                 <Icon
-                                    src='Icons/favorites.svg'
-                                    alt='favorites'
+                                    className="fas fa-heart"
                                 />
                                 favorites
                             </Title>
@@ -105,14 +103,14 @@ const Container = () => {
                         <div className='col text-muted'>
                             <Title>
                                 {' '}
-                                <Icon src='Icons/payment.svg' alt='payments' />
+                                <Icon className="fas fa-credit-card"/>
                                 payments
                             </Title>
                         </div>
                         <div className='col text-muted'>
                             <Title>
                                 {' '}
-                                <Icon src='Icons/address.svg' alt='address' />
+                                <Icon className="fas fa-map-marker-alt" />
                                 addresses
                             </Title>
                         </div>

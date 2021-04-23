@@ -255,8 +255,8 @@ function OtpDrawer({ phoneNumber, name, email, password, setState, state }) {
         // alert('Registeration Successfull');
         setState2({ ...state2, right: false });
         setState({ ...state, right: false });
-        localStorage.setItem("customerData", JSON.stringify(res.data));
-        history.push("/Restaurants");
+        localStorage.setItem("customerData", JSON.stringify(res.data.user));
+        history.push("/my-account");
       })
       .catch((err) => {
         console.log(err.response.data);
