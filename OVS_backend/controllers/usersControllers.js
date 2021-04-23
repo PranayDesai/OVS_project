@@ -60,3 +60,20 @@ exports.verifyUser = async (request, response) => {
     });
   }
 };
+
+exports.getUser = async (request, response) => {
+  try {
+    const user = await Users.find({
+      phonenumber: request.params.id * 1,
+    });
+    response.status(200).json({
+      status: 'success',
+      user,
+    });
+  } catch (err) {
+    response.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};

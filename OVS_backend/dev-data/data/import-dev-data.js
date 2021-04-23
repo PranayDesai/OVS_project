@@ -3,9 +3,9 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './../../config.env' });
 const mongoose = require('mongoose');
 // const garages = require('./../../models/garagesModel');
-const garages = mongoose.model('Garage', new mongoose.Schema());
+const garages = require('../../models/garagesModels');
 
-const DB = process.env.DATABASE.replace(
+const DB = process.env.DATABASE_LOCAL.replace(
   '<password>',
   process.env.DATABASE_PASSWORD
 );
@@ -36,7 +36,7 @@ const DB = process.env.DATABASE.replace(
 
   const importData = async () => {
     try {
-      await garages.insertMany(garagesData);
+      await garages.create(garagesData);
       console.log('Data imported successfully');
     } catch (err) {
       console.log('Error in importing...\n' + err);

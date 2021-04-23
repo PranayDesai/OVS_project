@@ -5,8 +5,14 @@ dotenv.config({ path: './config.env' });
 const app = require('./app');
 const mongoose = require('mongoose');
 
-//CONNECT DATABASE
-const DB = process.env.DATABASE.replace(
+//CONNECT DATABASE ON_LINE
+// const DB = process.env.DATABASE.replace(
+//   '<password>',
+//   process.env.DATABASE_PASSWORD
+// );
+
+//CONNECT DATABASE OFF_LINE
+const DB = process.env.DATABASE_LOCAL.replace(
   '<password>',
   process.env.DATABASE_PASSWORD
 );
