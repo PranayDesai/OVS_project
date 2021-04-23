@@ -83,7 +83,7 @@ class LandingUpper extends Component {
   };
 
   goTo = () => {
-    this.props.history.push("/Restaurent");
+    this.props.history.push("/Restaurants");
   };
 
 

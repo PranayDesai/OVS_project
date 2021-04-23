@@ -100,12 +100,12 @@ function HomeDummy() {
   //   const [totalExclusive, setTotalExclusive] = useState([]);
   //   const [totalPremium, setTotalPremium] = useState([]);
   //   const [totalVeg, setTotalVeg] = useState([]);
-
+  const {lat,long,area,place_name} = JSON.parse(window.localStorage.getItem("Coordinates"));
   const getData = (filter) => {
     var config = {
       method: "get",
       // url: `${process.env.REACT_APP_API_URL}/api/restaurant?lat=12.9259&lng=77.6229&filter=${filter}&page=1&limit=5`,
-      url: `http://localhost:9000/api/v1/garages`,
+      url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${lat},${long}/unit/km/subCategory/${filter}`,
       headers: {},
     };
 
@@ -132,10 +132,11 @@ function HomeDummy() {
   };
 
   useEffect(() => {
-    getData("top_pick");
-    // getData("exclusive");
-    // getData("newly_added");
-    // getData("veg");
+    getData("top-pick");
+    /* getData("two-wheeler-only"); */
+    getData("newly-added");
+    /*getData("four-wheeler-only");
+    getData("three-wheeler-only"); */
   }, []);
 
   return (
