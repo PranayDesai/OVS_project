@@ -6,9 +6,20 @@ const subGarages = new RegExp(
   'g'
 );
 const garagesRouter = express.Router();
+
+//For top-pick and newly-added
+// garagesRouter
+//   .route(subGarages)
+//   .get(garagesControllers.aliasGarages, garagesControllers.getAllGarages);
+
+// For geospatial location's
 garagesRouter
-  .route(subGarages)
-  .get(garagesControllers.aliasGarages, garagesControllers.getAllGarages);
+  .route(
+    '/garages-within/:distance/center/:latlng/unit/:unit/subCategory/:subCat'
+  )
+  .get(garagesControllers.getGaragesWithin);
+// /garages-within?distance=233&center=-40,45&unit=mi
+// /garages-within/233/center/-40,45/unit/mi
 garagesRouter.route('/').get(garagesControllers.getAllGarages);
 
 module.exports = garagesRouter;

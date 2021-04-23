@@ -28,37 +28,54 @@ const service = new mongoose.Schema({
   },
 });
 
-const garagesSchema = new mongoose.Schema({
-  name: {
-    type: String,
+const garagesSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+    },
+    password: {
+      type: String,
+    },
+    categories: {
+      type: [String],
+    },
+    mobile: {
+      type: Number,
+    },
+    email: {
+      type: String,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
+    ratingsAverage: {
+      type: Number,
+    },
+    img_url: {
+      type: String,
+    },
+    geometry: {
+      // GeoJSON
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point'],
+      },
+      coordinates: [Number],
+    },
+    items: {
+      type: [service],
+    },
   },
-  password: {
-    type: String,
-  },
-  categories: {
-    type: [String],
-  },
-  mobile: {
-    type: Number,
-  },
-  email: {
-    type: String,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  ratingsAverage: {
-    type: Number,
-  },
-  img_url: {
-    type: String,
-  },
-  geometry: geoSchema,
-  items: {
-    type: [service],
-  },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+
+//Garages index
+garagesSchema.index({ geometry: '2dsphere' });
 
 const Garages = mongoose.model('Garage', garagesSchema);
 
