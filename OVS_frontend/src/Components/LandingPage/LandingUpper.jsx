@@ -27,10 +27,12 @@ import {Link} from 'react-router-dom';
 class LandingUpper extends Component {
   constructor(props) {
     super(props);
-    
+    const userData = JSON.parse(window.localStorage.getItem('customerData'));
+    console.log(userData);
     this.state = {
       data: [],
       visible: false,
+      button:userData || false
     };
   }
 
@@ -84,16 +86,16 @@ class LandingUpper extends Component {
     this.props.history.push("/Restaurent");
   };
 
-  getButtons=()=>{
+  /* getButtons=()=>{
     
-    this.dataLocalStorage === null ?
+    this.userData === null ?
                   <div>
                   <div
                     className="col-lg-2 btn btn-lg align-self-center font-weight-bold "
                     style={{ textAlign: "right" }}
                   >
                     <LoginDrawer />
-                    {/* Login */}
+                    
                   </div>
                   <div
                     className="col-lg-3 btn btn-lg align-self-center font-weight-bold"
@@ -107,9 +109,9 @@ class LandingUpper extends Component {
                   </div>
                   : 
                   <Link exact to="/my-account">
-                    <Button variant="outlined">{ this.dataLocalStorage.name}</Button>
+                    <Button variant="outlined">{ this.userData.user.name}</Button>
                   </Link>
-  }
+  } */
 
   render() {
     return (
@@ -123,9 +125,31 @@ class LandingUpper extends Component {
                   <div className="col-1 mr-auto align-self-start">
                     <Logo src={websiteLogo} alt="ovs logo" />
                   </div>
-                  {this.getButtons()}
-                </div>
-              </InnerDiv>
+                 {this.state.button ?
+                 <Link exact to="/my-account">
+                  <Button variant="contained" color="primary">{this.state.button.name}</Button>
+                  </Link>
+                  :<> 
+                  <div
+                    className="col-lg-2 btn btn-lg align-self-center font-weight-bold "
+                    style={{ textAlign: "right" }}
+                  >
+                    <LoginDrawer />
+                    
+                  </div>
+                  <div
+                    className="col-lg-3 btn btn-lg align-self-center font-weight-bold"
+                    style={{
+                      // border: '1px solid red',
+                      textAlign: "left",
+                    }}
+                  >
+                    <RegisterDrawer />
+                  </div>
+                  </>
+                  }
+                  </div>
+                </InnerDiv>
 
               {/* SOME TEXT & TAG LINE */}
               <InnerDiv className="container">
