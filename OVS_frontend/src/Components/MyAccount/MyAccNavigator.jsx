@@ -25,7 +25,7 @@ const Wrapper = styled.div`
         .nav-link {
             text-decoration: none;
             color: #333;
-            font-size: 1.1rem;
+            font-size: 17px;
             font-weight: 500;
             &:hover {
                 color: #002d62;
