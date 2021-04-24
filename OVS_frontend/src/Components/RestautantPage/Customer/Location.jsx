@@ -40,10 +40,10 @@ export default function TemporaryDrawer() {
     });
 
     useEffect(() => {
-        if (localStorage.getItem('Coordinates') == null) {
+        if (window.localStorage.getItem('Coordinates') == null) {
             setArea('Bangaluru');
         } else {
-            setArea(JSON.parse(localStorage.getItem('Coordinates')).area);
+            setArea(JSON.parse(window.localStorage.getItem('Coordinates')).area);
         }
     }, []);
     // console.log(area);

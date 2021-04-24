@@ -82,7 +82,7 @@ const HotelCard = (props) => {
                         <h5 className='card-title' style={{ color: '#171a29' }}>
                             {data.name}
                             <br />
-                            <Tag>{data.cuisines.join(', ')}</Tag>
+                            <Tag>{data.categories.join(', ')}</Tag>
                         </h5>
                         <div
                             className='card-text font-weight-normal'
@@ -93,30 +93,22 @@ const HotelCard = (props) => {
                                 className='badge badge-success'
                             >
                                 <i className='fas fa-star mr-1'></i>
-                                {data.rating}
+                                {data.ratingsAverage}
                             </Badge>
-                            <span>&bull;</span>
-                            <span>{data.average_time} MINS</span>
-                            <span>&bull;</span>
-                            <span
+                            {/* <span>&bull;</span> */}
+                            <span>Contact Number : {data.mobile}</span>
+                            {/* <span>&bull;</span> */}
+                            {/* <span
                                 style={{
                                     marginRight: '0px',
                                 }}
                             >
                                 ₹{data.average_cost} FOR TWO
-                            </span>
+                            </span> */}
                             <div className='dropdown-divider'></div>
                             <Discount className='font-weight-normal'>
-                                <img
-                                    src='discountBadge.svg'
-                                    alt='discountBadge'
-                                    width='15px'
-                                    style={{
-                                        marginRight: '10px',
-                                        marginBottom: '5px',
-                                    }}
-                                />
-                                50% off | Use SWEGGYIT
+                               
+                                50% off | Use FirstService50
                             </Discount>
                             <QuickView
                                 className='text-center font-weight-bold mb-0'

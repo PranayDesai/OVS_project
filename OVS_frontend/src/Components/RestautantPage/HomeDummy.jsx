@@ -31,7 +31,7 @@ const Wrapper = styled.div`
     padding-bottom: 15px;
 
     &:hover {
-      color: #e46d47;
+      color: #002D62;
     }
   }
 
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   }
 
   .active {
-    background: #e46d47;
+    background: #002D62;
     margin-right: 15px;
     color: #fff;
     &:hover {
@@ -62,10 +62,10 @@ const Wrapper = styled.div`
   }
 
   .img-wrap {
-    img {
+    i {
       width: 40px;
-      border: 1px solid #e26d4d;
-      border-radius: 50%;
+      font-size:2rem;
+      
     }
 
     &:hover img {
@@ -91,15 +91,20 @@ const Title = styled.p`
 `;
 
 function HomeDummy() {
-  //   const [topPicks, setTopPicks] = useState([]);
-  //   const [exclusive, setExclusive] = useState([]);
-  //   const [premium, setPremium] = useState([]);
-  //   const [veg, setVeg] = useState([]);
-
-  //   const [totalTopPicks, setTotalTopPicks] = useState([]);
-  //   const [totalExclusive, setTotalExclusive] = useState([]);
-  //   const [totalPremium, setTotalPremium] = useState([]);
-  //   const [totalVeg, setTotalVeg] = useState([]);
+    
+  const [topPicks, setTopPicks] = useState([]);
+    const [twoWheelerOnly, setTwoWheelerOnly] = useState([]);
+    const [newlyAdded, setNewlyAdded] = useState([]);
+    const [fourWheelerOnly, setFourWheelerOnly] = useState([]);
+    const [threeWheelerOnly, setThreeWheelerOnly] = useState([]);
+    
+    
+    const [totalTwoWheelerOnly, setTotalTwoWheelerOnly] = useState([]);
+    const [totalNewlyAdded, setTotalNewlyAdded] = useState([]);
+    const [totalFourWheelerOnly, setTotalFourWheelerOnly] = useState([]);
+    const [totalThreeWheelerOnly, setTotalThreeWheelerOnly] = useState([]);
+    const [totalTopPicks, setTotalTopPicks] = useState([]);
+  
   const {lat,long,area,place_name} = JSON.parse(window.localStorage.getItem("Coordinates"));
   const getData = (filter) => {
     var config = {
@@ -112,19 +117,24 @@ function HomeDummy() {
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        // if (filter === "top_pick") {
-        //   setTopPicks(response.data.current);
-        //   setTotalTopPicks(response.data.total);
-        // } else if (filter === "exclusive") {
-        //   setExclusive(response.data.current);
-        //   setTotalExclusive(response.data.total);
-        // } else if (filter === "newly_added") {
-        //   setPremium(response.data.current);
-        //   setTotalPremium(response.data.total);
-        // } else if (filter === "veg") {
-        //   setVeg(response.data.current);
-        //   setTotalVeg(response.data.total);
-        // }
+        if (filter === "top-pick") {
+          setTopPicks(response.data.garages);
+          setTotalTopPicks(response.data.results);
+          console.log(topPicks);
+          console.log(totalTopPicks);
+        } else if (filter === "two-wheeler-only") {
+          setTwoWheelerOnly(response.data.garages);
+          setTotalTwoWheelerOnly(response.data.results);
+        } else if (filter === "newly-added") {
+          setNewlyAdded(response.data.garages);
+          setTotalNewlyAdded(response.data.results);
+        } else if (filter === "four-wheeler-only") {
+          setFourWheelerOnly(response.data.garages);
+          setTotalFourWheelerOnly(response.data.results);
+        } else if(filter === "three-wheeler-only"){
+              setThreeWheelerOnly(response.data.garages);
+              setTotalThreeWheelerOnly(response.data.results);
+        }
       })
       .catch(function (error) {
         console.log(error.response.data);
@@ -133,150 +143,141 @@ function HomeDummy() {
 
   useEffect(() => {
     getData("top-pick");
-    /* getData("two-wheeler-only"); */
+    getData("two-wheeler-only");
     getData("newly-added");
-    /*getData("four-wheeler-only");
-    getData("three-wheeler-only"); */
+    getData("four-wheeler-only");
+    getData("three-wheeler-only");
+    
   }, []);
 
   return (
-    <h1>HI</h1>
-    // <>
-    //   <Promotions />
-    //   <div className="container">
-    //     <Wrapper>
-    //       <div className="row">
-    //         <div className="col-3">
-    //           <div className="border-left border-right border-bottom shadow topHeader pt-5">
-    //             <div className="item active" href="topPicks">
-    //               <div className="row" id="list">
-    //                 <div className="col-3 p-1 img-wrap nohover">
-    //                   <img
-    //                     src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_90,h_90/rng/md/carousel/production/vt13uzhjrg5r49kh9oru"
-    //                     alt="Img1"
-    //                   />
-    //                 </div>
-    //                 <div className="col-9 text-left content">
-    //                   <p>Top Picks</p>
-    //                   <small>{totalTopPicks} OPTIONS</small>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //             <div className="item" href="Exclusive">
-    //               <div className="row">
-    //                 <div className="col-3 text-center img-wrap">
-    //                   <img
-    //                     src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_90,h_90/hxizld3pqhnk0smw27sl"
-    //                     alt="Img"
-    //                   />
-    //                 </div>
-    //                 <div className="col-9 text-left content">
-    //                   <p>Exclusive</p>
-    //                   <small>{totalExclusive} OPTIONS</small>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //             <div className="item " href="Premium">
-    //               <div className="row">
-    //                 <div className="col-3 text-right img-wrap">
-    //                   <img
-    //                     src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_90,h_90/marketing-dashboard/carousel/ftnsdmo6fotidtzobbm2"
-    //                     alt="Img"
-    //                   />
-    //                 </div>
-    //                 <div className="col-9 text-left content">
-    //                   <p>Premium</p>
-    //                   <small>{totalPremium} OPTIONS</small>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //             <div className="item" href="vegOnly">
-    //               <div className="row">
-    //                 <div className="col-3 text-center img-wrap">
-    //                   <img
-    //                     src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_90,h_90/qtjc8dzfexg72lug37a0"
-    //                     alt="Img"
-    //                   />
-    //                 </div>
-    //                 <div className="col-9 text-left content">
-    //                   <p>Veg Only</p>
-    //                   <small>{totalVeg} OPTIONS</small>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //             <div className="item" href="allItems">
-    //               <div className="row">
-    //                 <div className="col-3 text-center img-wrap ">
-    //                   <img
-    //                     src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_90,h_90/See_all_cj8kln"
-    //                     alt="Img"
-    //                   />
-    //                 </div>
-    //                 <div className="col-9 text-left  mb-5 content">
-    //                   <p>SEE ALL</p>
-    //                   <small>RESTAURANTS</small>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
+    
+    <>
+      <Promotions />
+      
+      <div className="container">
+        <Wrapper>
+          <div className="row">
+            <div className="col-3">
+              <div className="border-left border-right border-bottom shadow topHeader pt-5">
+                <div className="item active" href="topPicks">
+                  <div className="row" id="list">
+                    <div className="col-3 p-1 img-wrap nohover">
+                    <i class="fas fa-fire"></i>
+                    </div>
+                    <div className="col-9 text-left content">
+                      <p>Top Picks</p>
+                      <small>{totalTopPicks} OPTIONS</small>
+                    </div>
+                  </div>
+                </div>
+                <div className="item" href="Exclusive">
+                  <div className="row">
+                    
+                    <div className="col-3 text-center img-wrap">
+                    <i class="fas fa-biking"></i>
+                    </div>
+                    <div className="col-9 text-left content">
+                      <p>Two Wheeler only</p>
+                      <small>{totalTwoWheelerOnly} OPTIONS</small>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div className="item " href="Premium">
+                  <div className="row">
+                    <div className="col-3 text-right img-wrap">
+                    <i class="fas fa-smile"></i>
+                    </div>
+                    <div className="col-9 text-left content">
+                      <p>Newly Added</p>
+                      <small>{totalNewlyAdded} OPTIONS</small>
+                    </div>
+                  </div>
+                </div>
+                <div className="item" href="vegOnly">
+                  <div className="row">
+                    <div className="col-3 text-center img-wrap">
+                    <i class="fas fa-car"></i>
+                    </div>
+                    <div className="col-9 text-left content">
+                      <p>Four Wheeler Only</p>
+                      <small>{totalFourWheelerOnly} OPTIONS</small>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="item" href="allItems">
+                  <div className="row">
+                    <div className="col-3 text-center img-wrap ">
+                    <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div className="col-9 text-left  mb-5 content">
+                      <p>SEE ALL</p>
+                      <small>Garages</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    //         <div
-    //           className="col-9"
-    //           data-spy="scroll"
-    //           data-target="#list"
-    //           data-offset="0"
-    //         >
-    //           <Section className="row">
-    //             <Title>Top Pics</Title>
-    //             <div className="row row-cols-3" id="topPicks">
-    //               {topPicks.map((item) => (
-    //                 <HotelCard data={item} key={item._id} />
-    //               ))}
-    //               <MoreCard filter={"top_pick"} more={totalTopPicks - 5} />
-    //             </div>
-    //           </Section>
-    //           <Section className="row">
-    //             <Title>Exclusive</Title>
-    //             <div
-    //               className="row row-cols-3 justify-content-center"
-    //               id="Exclusive"
-    //             >
-    //               {exclusive.map((item) => (
-    //                 <HotelCard data={item} key={item._id} />
-    //               ))}
-    //               <MoreCard filter={"exclusive"} more={totalExclusive - 5} />
-    //             </div>
-    //           </Section>
-    //           <Section className="row">
-    //             <Title>Premium</Title>
-    //             <div
-    //               className="row row-cols-3 justify-content-center"
-    //               id="Premium"
-    //             >
-    //               {premium.map((item) => (
-    //                 <HotelCard data={item} key={item._id} />
-    //               ))}
-    //               <MoreCard filter={"newly_added"} more={totalPremium - 5} />
-    //             </div>
-    //           </Section>
-    //           <Section className="row">
-    //             <Title>Veg Only</Title>
-    //             <div
-    //               className="row row-cols-3 justify-content-center"
-    //               id="vegOnly"
-    //             >
-    //               {veg.map((item) => (
-    //                 <HotelCard data={item} key={item._id} />
-    //               ))}
-    //               <MoreCard filter={"veg"} more={totalVeg - 5} />
-    //             </div>
-    //           </Section>
-    //         </div>
-    //       </div>
-    //     </Wrapper>
-    //   </div>
-    // </h1>
+            <div
+              className="col-9"
+              data-spy="scroll"
+              data-target="#list"
+              data-offset="0"
+            >
+              <Section className="row">
+                <Title>Top Pics</Title>
+                <div className="row row-cols-3" id="topPicks">
+                  {
+                  topPicks.map((item,index) => (
+                    index<6&&<HotelCard data={item} key={item._id} />
+                  ))}
+                  <MoreCard filter={"top-pick"} more={totalTopPicks - 5} />
+                </div>
+              </Section>
+              <Section className="row">
+                <Title>Two Wheeler Only</Title>
+                <div
+                  className="row row-cols-3 justify-content-center"
+                  id="Exclusive"
+                >
+                  {twoWheelerOnly.map((item,index) => (
+                   index<6&& <HotelCard data={item} key={item._id} />
+                  ))}
+                  <MoreCard filter={"two-wheeler-only"} more={totalTwoWheelerOnly - 5} />
+                </div>
+              </Section>
+              <Section className="row">
+                <Title>Newly Added</Title>
+                <div
+                  className="row row-cols-3 justify-content-center"
+                  id="Newly Added"
+                >
+                  {newlyAdded.map((item,index) => (
+                    index<6&&<HotelCard data={item} key={item._id} />
+                  ))}
+                  <MoreCard filter={"newly-added"} more={totalNewlyAdded - 5} />
+                </div>
+              </Section>
+              <Section className="row">
+                <Title>Four Wheeler Only</Title>
+                <div
+                  className="row row-cols-3 justify-content-center"
+                  id="fourWheelerOnly"
+                >
+                  {fourWheelerOnly.map((item,index) => (
+                    index<6&&<HotelCard data={item} key={item._id} />
+                  ))}
+                  <MoreCard filter={"four-wheeler-only"} more={totalFourWheelerOnly - 5} />
+                </div>
+              </Section>
+            </div>
+          </div>
+        </Wrapper>
+      </div>
+    </>
   );
 }
 

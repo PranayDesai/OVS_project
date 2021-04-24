@@ -17,7 +17,6 @@ const Wrapper = styled.div`
     }
     .middlePart {
         background: #171a29;
-
         height: 245px;
         pointer-events: none;
     }
@@ -28,7 +27,7 @@ const Wrapper = styled.div`
 
     img {
         height: 165px;
-        margin: 30px 0px 0px 200px;
+        margin: 30px 0px 0px 100px;
     }
 
     h1 {
@@ -77,7 +76,7 @@ function Menupages() {
     console.log(data);
     return (
         <div>
-            <Navigator />
+            {/* <Navigator /> */}
             <Wrapper>
                 <div className='container-fluid thin'>
                     <div className='row'>
@@ -97,11 +96,11 @@ function Menupages() {
                 <div className='container-fluid middlePart'>
                     <div className='row'>
                         <div className='col-4'>
-                            <img src={data.img_url} alt='restaurantImage' />
+                            <img src={data.img_url} alt='restaurantImage'/>
                         </div>
                         <div className='col-4 text-left'>
                             <h1>{data.name}</h1>
-                            <div>{data.cuisines.join(', ')}</div>
+                            <div>{data.categories.join(', ')}</div>
                             <div className='my-2'>Koramangala,Bangalore</div>
                             <div className='row mt-3'>
                                 <div
@@ -112,7 +111,8 @@ function Menupages() {
                                 >
                                     <p>
                                         <i className='fas fa-star mr-1'></i>
-                                        {data.rating}
+                                        {/* {data.rating} */}
+                                        4.5
                                     </p>
                                     <small>1000+ Ratings</small>
                                 </div>
@@ -122,7 +122,7 @@ function Menupages() {
                                         borderRight: '1px solid #babbbf',
                                     }}
                                 >
-                                    <p>{data.average_time} mins</p>
+                                    <p>{/* {data.average_time} */}30 mins</p>
                                     <small>Delivery Time</small>
                                 </div>
                                 <div
@@ -133,13 +133,14 @@ function Menupages() {
                                 >
                                     <p>
                                         <i className='fas fa-rupee-sign mr-1'></i>
-                                        {data.average_cost}
+                                       {/*  {data.average_cost} */}
+                                       500
                                     </p>
                                     <small>Cost for Two</small>
                                 </div>
                             </div>
                         </div>
-                        <div className='col-4 mt-4'>
+                        <div className='col-4 mt-2'>
                             <div className='row'>
                                 <div className='newOffer'>OFFER</div>
                                 <div

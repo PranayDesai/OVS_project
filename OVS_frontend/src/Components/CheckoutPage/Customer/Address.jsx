@@ -4,7 +4,7 @@ import Location from './Location';
 import { useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
-    font-family: system-ui !important;
+    
     line-height: 1.2;
     background: #fff;
     margin-bottom: 20px;
@@ -36,9 +36,12 @@ const Title = styled.p`
     color: #282c3f;
 `;
 
-const LocationIcon = styled.img`
+const LocationIcon = styled.i`
     height: 50px;
     width: 50px;
+    background-color:black;
+    border-radius:50%;
+    font-size:50px;
     vertical-align: inherit;
     margin-radius: 0px;
     box-shadow: 0 3px 5px 0 rgba(40, 44, 63, 0.4);
@@ -70,9 +73,13 @@ const AddressContainer = styled.button`
     }
 `;
 
-const AddLocation = styled.img`
+const AddLocation = styled.i`
     height: 25px;
     width: 25px;
+    color:white;
+    background-color:black;
+    border-radius:50%;
+    font-size:25px;
     vertical-align: inherit;
     margin-radius: 0px;
     /* // box-shadow: 0 3px 5px 0 rgba(40, 44, 63, 0.4); */
@@ -121,8 +128,7 @@ const CurrAddr = () => {
                     <AddressContainer type='button' className='row py-3'>
                         <div className='col-1'>
                             <AddLocation
-                                src='Icons/location.svg'
-                                alt='placeholder'
+                                className="fas fa-map-marker-alt"
                             />
                         </div>
                         <div className='col'>
@@ -189,8 +195,7 @@ const Address = (props) => {
                     <div className='row'>
                         <Logo className='col-1'>
                             <LocationIcon
-                                src='Icons/placeholder.svg'
-                                alt='placeholder'
+                                className="fas fa-map-marker-alt"
                             />
                         </Logo>
                         <div className='col-11'>

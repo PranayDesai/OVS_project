@@ -55,6 +55,7 @@ const SortRestaurants = (props) => {
     const [data, setData] = useState([]);
     const [totalRestaurants, setTotalRestaurants] = useState();
     const [filter, setFilter] = useState('');
+    const {lat ,long} = JSON.parse(window.localStorage.getItem("Coordinates"));
     // useEffect(() => {
     // setFilter(props.filter);
     // }, []);
@@ -64,14 +65,14 @@ const SortRestaurants = (props) => {
         console.log('just checking', filter);
         var config = {
             method: 'get',
-            url: `${process.env.REACT_APP_API_URL}/api/restaurant?lat=12.9259&lng=77.6229&filter=${props.filter}`,
+            url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${lat},${long}/unit/km/subCategory/${props.filter}`,
             headers: {},
         };
 
         axios(config)
             .then(function (response) {
-                console.log('in use effect', response.data.current);
-                setData(response.data.current);
+                console.log('in use effect', response.data.garages);
+                setData(response.data.garages);
                 setTotalRestaurants(response.data.total);
             })
             .catch(function (error) {
@@ -82,10 +83,10 @@ const SortRestaurants = (props) => {
     const allData = () => {
         var config = {
             method: 'get',
-            url: `${process.env.REACT_APP_API_URL}/api/restaurant?lat=12.9259&lng=77.6229&filter=${filter}`,
+            url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${lat},${long}/unit/km/subCategory/${props.filter}`,
             headers: {},
         };
-
+        
         axios(config)
             .then(function (response) {
                 // console.log(response.data.current);
@@ -104,7 +105,7 @@ const SortRestaurants = (props) => {
     const filterData = (sort) => {
         var config = {
             method: 'get',
-            url: `${process.env.REACT_APP_API_URL}/api/restaurant?lat=12.9259&lng=77.6229&filter=${filter}&sort=${sort}`,
+            url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${lat},${long}/unit/km/subCategory/${props.filter}`,
             headers: {},
         };
 
@@ -144,19 +145,19 @@ const SortRestaurants = (props) => {
                         <ul className='list-inline'>
                             <button
                                 className='list-inline-item btn'
-                                onClick={() => filterData('average_time')}
+                                onClick={() => filterData('two-wheeler-only')}
                             >
                                 Relevance
                             </button>
                             <button
                                 className='btn list-inline-item'
-                                onClick={() => filterData('average_cost')}
+                                onClick={() => filterData('newly-added')}
                             >
                                 Cost for Two
                             </button>
                             <button
                                 className='list-inline-item btn'
-                                onClick={() => filterData('rating')}
+                                onClick={() => filterData('four-wheeler-only')}
                             >
                                 Rating
                             </button>
@@ -193,4 +194,8 @@ const SortRestaurants = (props) => {
     );
 };
 
+
+
 export default SortRestaurants;
+
+
