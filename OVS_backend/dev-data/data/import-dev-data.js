@@ -5,6 +5,13 @@ const mongoose = require('mongoose');
 // const garages = require('./../../models/garagesModel');
 const garages = require('../../models/garagesModels');
 
+// IMPORT AND EXPORT TO ONLINE DATABASE
+// const DB = process.env.DATABASE.replace(
+//   '<password>',
+//   process.env.DATABASE_PASSWORD
+// );
+
+// IMPORT AND EXPORT TO LOCAL DATABASE
 const DB = process.env.DATABASE_LOCAL.replace(
   '<password>',
   process.env.DATABASE_PASSWORD

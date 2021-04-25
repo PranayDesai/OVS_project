@@ -15,7 +15,7 @@ const registerationValidation = (data) => {
 
 const loginValidation = (data) => {
   const schema = Joi.object({
-    phoneNumber: Joi.string()
+    phonenumber: Joi.string()
       .min(10)
       .pattern(/^[0-9]+$/)
       .required(),
