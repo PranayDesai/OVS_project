@@ -1,24 +1,19 @@
 const Garages = require('../models/garagesModels');
 const APIFeatures = require('../utils/API_Features');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
-exports.getAllGarages = async (request, response) => {
-  try {
-    const features = new APIFeatures(Garages.find(), request.query);
-    features.filter().sort().limitFields().paginate();
-    const garages = await features.query;
+exports.getAllGarages = catchAsync(async (request, response) => {
+  const features = new APIFeatures(Garages.find(), request.query);
+  features.filter().sort().limitFields().paginate();
+  const garages = await features.query;
 
-    response.status(200).json({
-      status: 'success',
-      results: garages.length,
-      garages,
-    });
-  } catch (err) {
-    response.status(404).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+  response.status(200).json({
+    status: 'success',
+    results: garages.length,
+    garages,
+  });
+});
 
 exports.aliasGarages = async (request, response, next) => {
   const subUrl = { ...request };
@@ -38,25 +33,31 @@ exports.aliasGarages = async (request, response, next) => {
   next();
 };
 
-exports.getGaragesWithin = async (request, response, next) => {
+exports.getGaragesWithin = catchAsync(async (request, response, next) => {
   const { distance, latlng, unit, subCat } = request.params;
   const [lat, lng] = latlng.split(',');
   const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1;
-  if (!lat || !lng) {
-    response.status(400).json({
-      status: 'fail',
-      message: 'Please provide latitutr and longitude in the format lat,lng.',
-    });
+  if (!lat && !lng) {
+    // response.status(400).json({
+    //   status: 'fail',
+    //   message: 'Please provide latitutr and longitude in the format lat,lng.',
+    // });
+    return next(
+      new AppError(
+        'Please provide latitutr and longitude in the format lat,lng.',
+        400
+      )
+    );
   }
 
   if (subCat.includes('top-pick')) {
     request.query.sort = '-ratingsAverage';
   }
   if (subCat.includes('newly-added')) {
+    console.log('Inside at newly');
     request.query.sort = '-createdAt';
   }
   if (subCat.includes('three-wheeler-only')) {
-    console.log('Inside thre');
     request.query.categories = 'Three Wheeler';
     request.query.sort = '-ratingsAverage';
   }
@@ -87,4 +88,4 @@ exports.getGaragesWithin = async (request, response, next) => {
     results: garages.length,
     garages,
   });
-};
+});

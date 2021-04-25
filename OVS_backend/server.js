@@ -24,14 +24,6 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log('Connection to database is successfull!'));
-// mongoose
-//   .connect(DB, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log('Connection to database is successfull!'));
 
 // SERVER START
 app.listen(process.env.PORT || PORT, HOSTNAME, () => {

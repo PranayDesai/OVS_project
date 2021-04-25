@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 const fs = require('fs');
 const morgan = require('morgan');
+const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/errorController');
 
 const gargesRouter = require('./routes/garagesRouter');
 const usersRouter = require('./routes/usersRouter');
@@ -11,11 +13,15 @@ const usersRouter = require('./routes/usersRouter');
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 if (process.env.NODE_ENV == 'development') {
-  app.use(morgan('dev'));
 }
+app.use(morgan('dev'));
 
 // ROUTES
 app.use('/api/v1/garages', gargesRouter);
 app.use('/api/v1/users', usersRouter);
 
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
+app.use(globalErrorHandler);
 module.exports = app;
