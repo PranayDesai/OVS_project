@@ -24,6 +24,19 @@ const usersSchema = new mongoose.Schema({
     minlength: [10, 'A user phone number invalid'],
     maxlength: [10, 'A user phone number invalid'],
   },
+  geometry: {
+    // GeoJSON
+    type: {
+      type: String,
+      default: 'Point',
+      enum: ['Point'],
+    },
+    coordinates: {
+      type: [Number],
+      default: [72.611528, 22.998554],
+    },
+    required: false,
+  },
 });
 
 const Users = mongoose.model('User', usersSchema);
