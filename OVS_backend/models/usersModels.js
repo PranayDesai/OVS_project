@@ -35,6 +35,14 @@ const usersSchema = new mongoose.Schema({
       type: [Number],
       default: [72.611528, 22.998554],
     },
+    area: {
+      type: String,
+      default: 'Maninagar',
+    },
+    place_name: {
+      type: String,
+      default: 'Ahmedabad, Gujarat',
+    },
     required: false,
   },
 });
