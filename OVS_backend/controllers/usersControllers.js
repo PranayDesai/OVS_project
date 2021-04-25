@@ -1,6 +1,7 @@
 const Users = require('../models/usersModels');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const APIFeatures = require('../utils/API_Features');
 
 exports.getUser = async (request, response) => {
   try {
@@ -24,14 +25,30 @@ exports.updateUser = catchAsync(async (request, response, next) => {
   const illegalFieldsToUpdate = ['email', 'phonenumber'];
   illegalFieldsToUpdate.forEach((field) => delete queryObj[field]);
 
-  const updatedUser = await Garages.findByIdAndUpdate(req.params.id, queryObj, {
-    new: true,
-    runValidators: true,
-  });
-  if (!updatedGarage) return next(new AppError('No garages with this id'));
+  const updatedUser = await Users.findByIdAndUpdate(
+    request.params.id,
+    queryObj,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  if (!updatedUser) return next(new AppError('No user with this id'));
   response.status(200).json({
     status: 'success',
     message: 'Changes Updated successfully',
     data: updatedUser,
+  });
+});
+
+exports.getAllUser = catchAsync(async (request, response, next) => {
+  const features = new APIFeatures(Users.find(), request.query);
+  features.filter().sort().limitFields().paginate();
+  const users = await features.query;
+
+  response.status(200).json({
+    status: 'success',
+    results: users.length,
+    users,
   });
 });
