@@ -1,17 +1,8 @@
 const { Router } = require('express');
 const express = require('express');
 const garagesControllers = require('../controllers/garagesControllers');
-const subGarages = new RegExp(
-  '(top-pick|newly-added|three-vehicle-only|four-vehicle-only)',
-  'g'
-);
 const garagesRouter = express.Router();
-
-//For top-pick and newly-added
-// garagesRouter
-//   .route(subGarages)
-//   .get(garagesControllers.aliasGarages, garagesControllers.getAllGarages);
-
+const authControllers = require('../controllers/authControllers');
 // For geospatial location's
 garagesRouter
   .route(
@@ -21,5 +12,9 @@ garagesRouter
 // /garages-within?distance=233&center=-40,45&unit=mi
 // /garages-within/233/center/-40,45/unit/mi
 garagesRouter.route('/').get(garagesControllers.getAllGarages);
+garagesRouter.route('/verifyGarage').post(authControllers.verifyGarage);
+garagesRouter.route('/addGarage').post(authControllers.addGarage);
+
+garagesRouter.route('/:id').patch(garagesControllers.updateGarage);
 
 module.exports = garagesRouter;

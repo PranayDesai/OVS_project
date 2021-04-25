@@ -89,3 +89,24 @@ exports.getGaragesWithin = catchAsync(async (request, response, next) => {
     garages,
   });
 });
+
+exports.updateGarage = catchAsync(async (request, response, next) => {
+  const queryObj = { ...request.body };
+  const illegalFieldsToUpdate = ['email', 'phonenumber'];
+  illegalFieldsToUpdate.forEach((field) => delete queryObj[field]);
+
+  const updatedGarage = await Garages.findByIdAndUpdate(
+    request.params.id,
+    queryObj,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  if (!updatedGarage) return next(new AppError('No garages with this id'));
+  response.status(200).json({
+    status: 'success',
+    message: 'Changes Updated successfully',
+    data: updatedGarage,
+  });
+});

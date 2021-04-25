@@ -6,8 +6,9 @@ const {
   loginValidation,
   registerationValidation,
 } = require('../utils/validation');
+const Garages = require('../models/garagesModels');
 const UserOTP = 9000;
-
+const GarageOTP = 9999;
 exports.addUser = catchAsync(async (request, response, next) => {
   if (UserOTP === request.body.otp) {
     const { phonenumber, email, name, password } = request.body;
@@ -40,7 +41,8 @@ exports.addUser = catchAsync(async (request, response, next) => {
 
     response.status(200).json({
       status: 'success',
-      newUser,
+      message: 'User created successfully',
+      data: newUser,
     });
   } else {
     return next(new AppError('Invalid OTP!', 404));
@@ -75,6 +77,64 @@ exports.login = catchAsync(async (request, response, next) => {
   if (user.length <= 0) return next(new AppError('Invalid Credentials', 404));
   response.status(200).json({
     status: 'success',
-    user,
+    data: user,
   });
+});
+
+exports.verifyGarage = catchAsync(async (request, response, next) => {
+  let { name, password, email, phonenumber } = request.body;
+  const { error } = registerationValidation({
+    name,
+    password,
+    email,
+    phonenumber,
+  });
+  if (error) return next(new AppError(`Validation error: ${error}`, 400));
+  phonenumber = parseInt(phonenumber);
+  email = email.toLowerCase();
+
+  const oldGarage = await Garages.find({
+    $or: [{ phonenumber: phonenumber }, { email: email }],
+  });
+  if (oldGarage.length > 0)
+    return next(new AppError('User already exits', 404));
+  response.status(200).json({
+    status: 'success',
+    message: 'OTP send successfully',
+  });
+});
+
+exports.addGarage = catchAsync(async (request, response, next) => {
+  if (GarageOTP === request.body.otp) {
+    let { name, password, email, phonenumber } = request.body;
+    const { error } = registerationValidation({
+      name,
+      password,
+      email,
+      phonenumber,
+    });
+    if (error) return next(new AppError(`Validation error: ${error}`, 400));
+    phonenumber = parseInt(phonenumber);
+    email = email.toLowerCase();
+
+    const oldGarage = await Garages.find({
+      $or: [{ phonenumber: phonenumber }, { email: email }],
+    });
+    if (oldGarage.length > 0)
+      return next(new AppError('User already exits', 404));
+
+    const newGarage = await Garages.create({
+      name,
+      password,
+      email,
+      phonenumber,
+    });
+    response.status(200).json({
+      status: 'success',
+      message: 'Garage created successfully',
+      data: newGarage,
+    });
+  } else {
+    return next(new AppError('Invalid OTP!', 404));
+  }
 });
