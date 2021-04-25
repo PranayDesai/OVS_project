@@ -69,15 +69,37 @@ exports.verifyUser = catchAsync(async (request, response, next) => {
 });
 
 exports.login = catchAsync(async (request, response, next) => {
-  const { email, password } = request.body;
+  if (UserOTP === request.body.otp) {
+    const { phonenumber } = request.body;
+    const { error } = loginValidation({ phonenumber });
+    if (error)
+      return next(new AppError('Phone Number Validation error ' + error, 404));
+    const user = await Users.find({
+      phonenumber: phonenumber,
+    });
+    if (user.length <= 0)
+      return next(new AppError('User does not exist! Need to Register', 404));
+    response.status(200).json({
+      status: 'success',
+      data: user,
+    });
+  } else {
+    return next(new AppError('Invalid OTP!', 404));
+  }
+});
+exports.loginVerify = catchAsync(async (request, response, next) => {
+  const { phonenumber } = request.body;
+  const { error } = loginValidation({ phonenumber });
+  if (error)
+    return next(new AppError('Phone Number Validation error ' + error, 404));
   const user = await Users.find({
-    email: email.toLowerCase(),
-    password: password,
+    phonenumber: phonenumber,
   });
-  if (user.length <= 0) return next(new AppError('Invalid Credentials', 404));
+  if (user.length <= 0)
+    return next(new AppError('User does not exist! Need to Sign Up', 404));
   response.status(200).json({
     status: 'success',
-    data: user,
+    message: 'OTP send successfully',
   });
 });
 
