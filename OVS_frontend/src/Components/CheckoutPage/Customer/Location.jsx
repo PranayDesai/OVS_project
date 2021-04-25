@@ -129,9 +129,11 @@ const AddressContainer = styled.button`
     }
 `;
 
-const AddLocation = styled.img`
+const AddLocation = styled.i`
     height: 25px;
     width: 25px;
+    color:black;
+    font-size:25px;
     vertical-align: inherit;
     margin-radius: 0px;
     /* // box-shadow: 0 3px 5px 0 rgba(40, 44, 63, 0.4); */
@@ -146,19 +148,19 @@ const useStyles = makeStyles({
     },
 });
 
-export default function TemporaryDrawer() {
+export default function Location() {
     const history = useHistory();
     const [flatNo, setFlatNo] = useState('');
     const [landmark, setLandmark] = useState('');
     const [type, setType] = useState('');
     const classes = useStyles();
     const [state, setState] = React.useState({
-        left: false,
+       left : false,
     });
 
     const getUserLocation = () => {
-        console.log(getUserLocation);
-        const data = JSON.parse(localStorage.getItem('CustomerCurrentLoc'));
+        /* console.log(getUserLocation); */
+        const data = JSON.parse(window.localStorage.getItem('CustomerCurrentLoc'));
 
         const userLoc = {
             flat_no: flatNo,
@@ -169,13 +171,14 @@ export default function TemporaryDrawer() {
             type: type,
         };
 
-        localStorage.setItem('CustomerCurrentLoc', JSON.stringify(userLoc));
+        window.localStorage.setItem('CustomerCurrentLoc', JSON.stringify(userLoc));
 
         setState({ ...state, left: false });
         history.push('/CheckoutPage');
     };
 
     const toggleDrawer = (anchor, open) => (event) => {
+        setState({ ...state, [anchor]: open });
         if (
             event.type === 'keydown' &&
             (event.key === 'Tab' || event.key === 'Shift')
@@ -183,7 +186,7 @@ export default function TemporaryDrawer() {
             return;
         }
 
-        setState({ ...state, [anchor]: open });
+        
     };
 
     const list = (anchor) => (
@@ -303,13 +306,20 @@ export default function TemporaryDrawer() {
 
     return (
         <div>
+            <Drawer
+                anchor={'left'}
+                open={state['left']}
+                //onClose={toggleDrawer('left', false)}
+            >
+                {list('left')}
+            </Drawer>
             <AddressContainer
                 type='button'
                 className='btn btn-md text-capitalize row py-3'
                 onClick={toggleDrawer('left', true)}
             >
                 <div className='col-1'>
-                    <AddLocation src='Icons/location.svg' alt='placeholder' />
+                    <AddLocation className="fas fa-map-marker-alt" />
                 </div>
                 <div className='col '>
                     <div className=' row row-cols-1'>
@@ -334,13 +344,7 @@ export default function TemporaryDrawer() {
                     </div>
                 </div>
             </AddressContainer>
-            <Drawer
-                anchor={'left'}
-                open={state['left']}
-                // onClose={toggleDrawer('left', false)}
-            >
-                {list('left')}
-            </Drawer>
+            
         </div>
     );
 }

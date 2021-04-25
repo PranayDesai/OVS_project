@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 `;
 
 const CheckoutPage = (props) => {
-    console.log(props.location.isAddrSelected);
+    console.log(props.location);
     const [isAddrSelected, setIsAddrSelected] = useState(false);
 
     useEffect(() => {
@@ -35,22 +35,24 @@ const CheckoutPage = (props) => {
         <>
             {/* <CheckoutNavigator /> */}
             <Wrapper className='container-fluid'>
+                {console.log(isAddrSelected)}
                 <div className='container'>
                     <div className='row'>
                         <div className='col-8'>
                             <div className='row  text-left'>
-                                <div className='col-lg-8'>
+                                <div className='col-lg-11'>
                                     <Login />
                                 </div>
-                                <div className='col-lg-8'>
+                                <div className='col-lg-11'>
                                     <Address flag={isAddrSelected} />
                                 </div>
                                 {isAddrSelected ? (
-                                    <div className='col-lg-8'>
+                                    <div className='col-lg-11'>
                                         <Payment />
                                     </div>
                                 ) : (
-                                    <div></div>
+                                    
+                                    <div>{console.log("inside null")}</div>
                                 )}
                             </div>
                         </div>
@@ -60,7 +62,7 @@ const CheckoutPage = (props) => {
                     </div>
                 </div>
             </Wrapper>
-            <MainFooter />
+            {/* <MainFooter /> */}
         </>
     );
 };

@@ -73,6 +73,7 @@ const Wrapper = styled.div`
 
 function Menupages() {
     const data = JSON.parse(localStorage.getItem('hotel'));
+    const userLocation = JSON.parse(localStorage.getItem('Coordinates'));
     console.log(data);
     return (
         <div>
@@ -88,7 +89,7 @@ function Menupages() {
                                     position: 'sticky',
                                 }}
                             >
-                                Home / Bangalore / Kormangala / {data.name}
+                                Home / {userLocation.area} / {userLocation.place_name} / {data.name}
                             </small>
                         </div>
                     </div>

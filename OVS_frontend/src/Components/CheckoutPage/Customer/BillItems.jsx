@@ -19,31 +19,7 @@ const BillItems = (props) => {
         <Wrapper>
             <div className='row justify-content-between mb-2'>
                 <div className='row col-md-auto align-self-center pr-0'>
-                    <div className='col-1'>
-                        {data.veg ? (
-                            <img
-                                src='/Icons/veg.png'
-                                alt='veg'
-                                style={{
-                                    width: '15px',
-                                    height: '15px',
-                                    marginRight: '4px',
-                                    marginBottom: '3px',
-                                }}
-                            />
-                        ) : (
-                            <img
-                                src='/Icons/nonveg.png'
-                                alt='non-veg'
-                                style={{
-                                    width: '15px',
-                                    height: '15px',
-                                    marginRight: '4px',
-                                    marginBottom: '3px',
-                                }}
-                            />
-                        )}
-                    </div>
+                    
                     <Title
                         className='col text-left pr-0'
                         style={{ maxWidth: '220px', paddingLeft: '7px' }}

@@ -267,10 +267,9 @@ const Address = (props) => {
                     <Wrapper className='container'>
                         <div className='row'>
                             <Logo className='col-1'>
-                                <LocationIcon
-                                    src='Icons/placeholder.svg'
-                                    alt='placeholder'
-                                />
+                            <LocationIcon
+                                className="fas fa-map-marker-alt"
+                            />
                             </Logo>
                             <div className='col-11'>
                                 <div className='row '>
@@ -280,8 +279,9 @@ const Address = (props) => {
                                     <div class='w-100'></div>
                                     {localStorage.getItem(
                                         'CustomerCurrentLoc',
-                                    ) == null ? (
+                                    ) === null ? (
                                         <div className='col-5 '>
+                                            {console.log("inside location")}
                                             <Location />
                                         </div>
                                     ) : (
