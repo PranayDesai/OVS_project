@@ -7,7 +7,7 @@ import MainFooter from "../LandingPage/MainFooter";
 function Home() {
   return (
     <div>
-      {/* <Navigator /> */}
+      <Navigator />
       <HomeDummy />
       {/* <AllRestaurants /> */}
       {/* <MainFooter /> */}

@@ -183,6 +183,7 @@ class LandingUpper extends Component {
                       <button
                         type="button"
                         className="col-2  btn btn-sm align-self-center text-right ml-4"
+                    
                       >
                         Locate Me
                       </button>

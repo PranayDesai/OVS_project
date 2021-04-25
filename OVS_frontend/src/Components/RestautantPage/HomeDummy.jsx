@@ -3,7 +3,8 @@ import Promotions from "./Promotions";
 import styled from "styled-components";
 import HotelCard from "./HotelCard";
 import MoreCard from "./MoreCard";
-var axios = require("axios");
+/* var axios = require("axios"); */
+import axios from 'axios';
 
 const Wrapper = styled.div`
   color: #535665;
@@ -98,19 +99,22 @@ function HomeDummy() {
     const [fourWheelerOnly, setFourWheelerOnly] = useState([]);
     const [threeWheelerOnly, setThreeWheelerOnly] = useState([]);
     
-    
+
     const [totalTwoWheelerOnly, setTotalTwoWheelerOnly] = useState([]);
     const [totalNewlyAdded, setTotalNewlyAdded] = useState([]);
     const [totalFourWheelerOnly, setTotalFourWheelerOnly] = useState([]);
     const [totalThreeWheelerOnly, setTotalThreeWheelerOnly] = useState([]);
     const [totalTopPicks, setTotalTopPicks] = useState([]);
   
-  const {lat,long,area,place_name} = JSON.parse(window.localStorage.getItem("Coordinates"));
+    
+  const userData = JSON.parse(window.localStorage.getItem("customerData"));
+  
+  
   const getData = (filter) => {
     var config = {
       method: "get",
       // url: `${process.env.REACT_APP_API_URL}/api/restaurant?lat=12.9259&lng=77.6229&filter=${filter}&page=1&limit=5`,
-      url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${lat},${long}/unit/km/subCategory/${filter}`,
+      url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${userData.geometry.coordinates[1]},${userData.geometry.coordinates[0]}/unit/km/subCategory/${filter}`,
       headers: {},
     };
 
@@ -142,11 +146,34 @@ function HomeDummy() {
   };
 
   useEffect(() => {
+    if(window.localStorage.getItem("Coordinates"))
+    {
+      const {lat,long,area,place_name} = JSON.parse(window.localStorage.getItem("Coordinates"));
+      const updateUserGeometry = async () => {
+        const result = await axios.patch(
+          `http://localhost:9000/api/v1/users/${userData._id}`,
+          {
+            geometry: {
+              type: 'Point',
+              coordinates: [long, lat],
+              area:area,
+              place_name:place_name
+            },
+          },
+          {
+            'Content-Type': 'application/json',
+          }
+        );
+        console.log(result);
+      }
+      updateUserGeometry();
+    }
+    
     getData("top-pick");
     getData("two-wheeler-only");
     getData("newly-added");
     getData("four-wheeler-only");
-    getData("three-wheeler-only");
+   
     
   }, []);
 

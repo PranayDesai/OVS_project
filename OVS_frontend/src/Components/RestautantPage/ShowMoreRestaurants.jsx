@@ -59,12 +59,12 @@ const ShowMoreRestaurants = (props) => {
     // console.log('props.location.filter', props.location.filter, filter);
     return (
         <>
-            {/* <Navigator /> */}
+            <Navigator />
             <Wrapper>
                 <div className='container-fluid' style={{ width: '90%' }}>
                     <div className='row row-cols-1'>
                         {filter === 'top-pick' ? (
-                            <Title className='col row-cols-1'>
+                            <Title className='col-lg-12 '>
                                 <div className='row'>
                                     <div className='col text-left'>
                                         Top Picks
@@ -77,7 +77,7 @@ const ShowMoreRestaurants = (props) => {
                                 </div>
                             </Title>
                         ) : filter === 'four-wheeler-only' ? (
-                            <Title className='col row-cols-1'>
+                            <Title className='col-lg-12 '>
                                 <div className='row'>
                                     <div className='col text-left'>
                                         Four Wheelers Only
@@ -89,7 +89,7 @@ const ShowMoreRestaurants = (props) => {
                                 </div>
                             </Title>
                         ) : filter === 'newly-added' ? (
-                            <Title className='col row-cols-1'>
+                            <Title className='col-lg-12 '>
                                 <div className='row'>
                                     <div className='col text-left'>Newly Added</div>
                                     <div class='w-100'></div>

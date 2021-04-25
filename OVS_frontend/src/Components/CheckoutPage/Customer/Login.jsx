@@ -9,9 +9,8 @@ const Wrapper = styled.div`
     margin-bottom: 20px;
     margin-top: 30px;
     padding-top: 35px;
-   /*  // padding-right: 40px; */
     padding-bottom: 39px;
-    /* // padding-left: 40px; */
+
 `;
 
 const Title = styled.p`
@@ -31,23 +30,18 @@ const Logo = styled.div`
     padding: 0px !important;
 `;
 
-const Tick = styled.img`
-    margin-left: 15px;
-    height: 20px;
-    width: 20px;
+const Tick = styled.i`
+    margin-left: 5px;
+    font-size:2rem;
+    color:green;
     vertical-align: inherit;
 `;
 
-const Avatar = styled.i`
+const Avatar = styled.img`
     height: 50px;
     width: 50px;
-    color:white;
-    background-color:black;
-    font-size:40px;
-    padding:3px;
-    border-radius:50%;
     vertical-align: inherit;
-    text-align:center;
+    font-size:2rem;
     margin-radius: 0px;
     box-shadow: 0 3px 5px 0 rgba(40, 44, 63, 0.4);
 `;
@@ -63,34 +57,31 @@ const Info = styled.p`
 `;
 
 const Login = () => {
-    const data = JSON.parse(window.localStorage.getItem('customerData'));
+    const data = JSON.parse(localStorage.getItem('customerData'));
     return (
         <>
             <Wrapper className='container'>
-                {console.log(data)}
                 <div className='row'>
-                    <Logo className='col-1'>
-                        <Avatar className="fas fa-user" />
-                    </Logo>
+                    
+                    <i class="fas fa-user col-1" style={{color:"#002D62" ,fontSize:"2rem",marginTop:"5px"}}></i>
+                    
                     <div className='col-11'>
-                        
-                            <div className='col'>
+                        <div className='row row-cols-1'>
+                            <div className='col-11'>
                                 <Title>
                                     Logged in
-                                    <i class="fas fa-check-circle"></i>
+                                    <i class="fas fa-check-circle" style={{color:"green",marginLeft:"10px"}}></i>
                                 </Title>
                             </div>
                             <div className='col'>
                                 <Info>
-                                    {' '}
                                     {data.name}
-                                    {'  |  '}
-                                    
+                                    {'   |   '}
                                     {data.phonenumber}
                                 </Info>
                             </div>
                         </div>
-                    
+                    </div>
                 </div>
             </Wrapper>
         </>

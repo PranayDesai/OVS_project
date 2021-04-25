@@ -72,14 +72,14 @@ const Wrapper = styled.div`
 `;
 
 function Menupages() {
-    const data = JSON.parse(localStorage.getItem('hotel'));
-    const userLocation = JSON.parse(localStorage.getItem('Coordinates'));
+    const data = JSON.parse(localStorage.getItem('hotel')); 
+     const userdata =JSON.parse(localStorage.getItem('customerData')).geometry;
     console.log(data);
     return (
         <div>
-            {/* <Navigator /> */}
+            <Navigator />
             <Wrapper>
-                <div className='container-fluid thin'>
+                {/* <div className='container-fluid thin'>
                     <div className='row'>
                         <div className='col-12 my-1 text-left'>
                             <small
@@ -89,11 +89,11 @@ function Menupages() {
                                     position: 'sticky',
                                 }}
                             >
-                                Home / {userLocation.area} / {userLocation.place_name} / {data.name}
+                                Home /  {userdata.area} /  {userdata.place_name}  / {data.name}
                             </small>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className='container-fluid middlePart'>
                     <div className='row'>
                         <div className='col-4'>

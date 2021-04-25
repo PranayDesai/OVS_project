@@ -18,8 +18,8 @@ const City = styled.button`
     border-bottom: 2px solid black;
     &:hover {
         cursor: pointer;
-        color: #fc8019;
-        border-bottom: 2px solid #fc8019;
+        color: #002D62;
+        border-bottom: 2px solid #002D62;
     }
 `;
 

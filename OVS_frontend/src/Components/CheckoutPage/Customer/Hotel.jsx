@@ -19,7 +19,7 @@ const Logo = styled.img`
 
 const Title = styled.p`
     margin-top: 5px;
-    margin-bottom: 1px;
+    margin-bottom: 5px;
     font-size: 17px !important;
     color: #282c3f;
     font-weight: 500;

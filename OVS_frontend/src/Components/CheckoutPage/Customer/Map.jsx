@@ -38,8 +38,8 @@ const Map = () => {
 
     const navStyle = {
         position: 'absolute',
-        right: -3,
-        bottom: 70,
+        right: 25,
+        bottom: 170,
         margin: 10,
     };
     // console.log(customerCoords);
@@ -103,8 +103,8 @@ const Map = () => {
                     latitude={data.lat}
                     longitude={data.long}
                 >
-                    <Loc src='/Icons/mapbox.svg' alt='location' />
-                    {data.area}
+                    {/* <Loc src='/Icons/mapbox.svg' alt='location' />
+                    {data.area} */}
                 </Marker>
                 <GeolocateControl
                     style={geolocateStyle}

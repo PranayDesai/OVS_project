@@ -163,18 +163,18 @@ function OtpDrawer({ phoneNumber, setState, state }) {
 
         axios
             .post(
-                `${process.env.REACT_APP_API_URL}/api/customer/login/verify`,
+                `http://localhost:9000/api/v1/users/login`,
                 {
-                    phoneNumber: phoneNumber,
-                    otp: otp,
+                    phonenumber: phoneNumber,
+                    otp: parseInt(otp),
                 },
             )
             .then((res) => {
-                // console.log(res);
+                console.log(res);
                 // alert('Login Successfull');
                 setState2({ ...state2, right: false });
                 setState({ ...state, right: false });
-                localStorage.setItem('customerData', JSON.stringify(res.data));
+                localStorage.setItem('customerData', JSON.stringify(res.data.data));
                 history.push('/Restaurants');
             })
             .catch((err) => {
@@ -185,8 +185,8 @@ function OtpDrawer({ phoneNumber, setState, state }) {
 
     const getOtp = () => {
         axios
-            .post(`${process.env.REACT_APP_API_URL}/api/customer/login`, {
-                phoneNumber: phoneNumber,
+            .post(`http://localhost:9000/api/v1/users/loginVerify`, {
+                phonenumber: phoneNumber,
             })
             .then((res) => {
                 // console.log(res);

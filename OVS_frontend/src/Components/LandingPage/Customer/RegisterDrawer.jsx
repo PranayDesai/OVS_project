@@ -243,7 +243,7 @@ function OtpDrawer({ phoneNumber, name, email, password, setState, state }) {
     // console.log(phoneNumber, name, email, password, otp);
     // console.log(setState, state);
     axios
-      .post(`http://localhost:9000/api/v1/users`, {
+      .post(`http://localhost:9000/api/v1/users/addUser`, {
         otp: parseInt(otp),
         name: name,
         email: email,
@@ -251,11 +251,11 @@ function OtpDrawer({ phoneNumber, name, email, password, setState, state }) {
         phonenumber: phoneNumber,
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         // alert('Registeration Successfull');
         setState2({ ...state2, right: false });
         setState({ ...state, right: false });
-        localStorage.setItem("customerData", JSON.stringify(res.data.user));
+        localStorage.setItem("customerData", JSON.stringify(res.data.data));
         history.push("/my-account");
       })
       .catch((err) => {

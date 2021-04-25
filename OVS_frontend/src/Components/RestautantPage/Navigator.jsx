@@ -3,17 +3,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Login from './Customer/Login';
 import Location from './Customer/Location';
-import websiteLogo from "../../Pics and logo/LandingPage/WebSiteLogo.png";
+import websiteLogo from '../../Pics and logo/LandingPage/WebSiteLogo.png';
 
 const Wrapper = styled.div`
     overflow: hidden;
     padding: 10px 0;
-    /* // background: #fff;
-    // box-shadow: 2px 0px 5px #e3e3e3; */
     margin: 0;
     box-sizzing: border-box;
     font-family: sans-serif;
-
     .logo-container {
         padding: 10px;
     }
@@ -26,7 +23,7 @@ const Wrapper = styled.div`
             font-size: 1.1rem;
             font-weight: 500;
             &:hover {
-                color: #fc8019;
+                color: #002D62;
             }
         }
     }
@@ -54,12 +51,20 @@ const Address = styled.button`
     white-space: nowrap;
     &:hover {
         cursor: pointer;
-        color: #fc8019;
+        color: #002D62;
     }
 `;
 
-/* 
- function CustomerName({ name }) {
+const SVG = styled.svg`
+    stroke: currentColor;
+    fill: #002D62;
+    stroke-width: 0;
+    &:hover {
+        transform: scale(1.05);
+    }
+`;
+
+function CustomerName({ name }) {
     if (name.length < 2) {
         return <Login />;
     } else {
@@ -73,65 +78,59 @@ const Address = styled.button`
             </Link>
         );
     }
-}  */
+}
 
-export default function Navigator(){
-    /* const [name, setName] = useState('');
+function Navigator() {
+    const [name, setName] = useState('');
     const [placeName, setPlaceName] = useState('');
 
-    useEffect(() => { */
-        /* if (window.localStorage.getItem('customerData') == null) {
+    useEffect(() => {
+        if (localStorage.getItem('customerData') == null) {
             setName('');
-            
         } else {
-            setName(JSON.parse(window.localStorage.getItem('customerData')).name);
-            
+            setName(JSON.parse(localStorage.getItem('customerData')).name);
         }
 
-        if (window.localStorage.getItem('Coordinates') == null) {
+        if (localStorage.getItem('Coordinates') == null) {
             setPlaceName('Karnatak, India');
         } else {
             setPlaceName(
-                JSON.parse(window.localStorage.getItem('Coordinates')).place_name,
+                JSON.parse(localStorage.getItem('Coordinates')).place_name,
             );
         }
-    }, []);  */
-    const userData = JSON.parse(window.localStorage.getItem("customerData"));
-    const locationData = JSON.parse(window.localStorage.getItem("Coordinates"));
+    }, []);
+    console.log(name);
 
     return (
-        
         <Wrapper className='container-fluid shadow'>
-            {console.log("inside return")}
             <div className='row'>
                 <div className='col-lg-6  mt-0'>
                     <div className='logo-container-fluid'>
                         <ul className='list-inline'>
                             <li className='list-inline-item'>
                                 <Link
-                                   exact to='/Restaurants'
+                                    to='/Restaurants'
                                     type='button'
                                     className='btn btn-lg'
                                 >
-                                    <img src={websiteLogo} alt="websitelogo" style={{width:"60px",height:"55px"}}/>
+                                    <img src={websiteLogo} alt="website logo" style={{width:"55px",height:"50px"}}></img>
                                 </Link>
                             </li>
                             <li className='list-inline-item '>
-                                {/* <Location /> */}
-                                new
+                                <Location />
                             </li>
                             <Address
                                 className='list-inline-item text-truncate text-capitalize'
                                 style={{ maxWidth: '230px' }}
                             >
-                                
-                              {locationData.place_name}
+                                {/* Karnatak, India */}
+                                {placeName}
                             </Address>
                             <li className='list-inline-item'>
                                 <button type='button' className='btn btn-sm'>
                                     <i
                                         className='fas fa-chevron-down'
-                                        style={{ color: '#fc8019' }}
+                                        style={{ color: '#002D62' }}
                                     ></i>
                                 </button>
                             </li>
@@ -148,7 +147,7 @@ export default function Navigator(){
                             </div>
                             <div className='nav-item'>
                                 <Link className='nav-link'>
-                                    
+                                <i class="fas fa-percentage"></i>
                                     Offer
                                 </Link>
                             </div>
@@ -158,7 +157,8 @@ export default function Navigator(){
                                 </Link>
                             </div>
                             <div className='nav-item text-capitalize'>
-                                
+                                {/* <Login /> */}
+                                <CustomerName name={name} />
                             </div>
                             <div className='nav-item'>
                                 <button
@@ -183,4 +183,4 @@ export default function Navigator(){
     );
 }
 
- 
+export default Navigator;

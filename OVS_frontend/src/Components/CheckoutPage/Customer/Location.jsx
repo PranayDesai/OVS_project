@@ -8,7 +8,6 @@ import Map from './Map';
 import { useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
-    font-family: system-ui !important;
     overflow: hidden;
     padding: 10px 0;
     margin: 0;
@@ -23,34 +22,21 @@ const Wrapper = styled.div`
     width: inherit;
     background: #fff;
     z-index: 1000;
-    /* div {
-        // border: 1px solid red;
-    } */
 `;
 
 const Middle = styled.div`
     margin-top: 80px;
     width: 80%;
-    /* div {
-        // border: 1px solid red;
-        // padding: 10px;
-    } */
 `;
 
 const MapContainer = styled.div`
     font: 400 11px Roboto, Arial, sans-serif !important;
-    /* // cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default;
-    // z-index: 3; */
     box-sizing: inherit;
-   /*  // position: absolute; */
-    height: 300px;
-    width: 100%;
+    height: 250px;
+    width: 350px;
     padding: 0px;
     border-width: 0px;
     margin: 0px;
-  /*   // left: 0px;
-    // top: 0px;
-    // touch-action: pan-x pan-y; */
 `;
 
 const Button2 = styled.button`
@@ -62,7 +48,7 @@ const Button2 = styled.button`
 `;
 
 const Wrapper2 = styled.div`
-    font-family: system-ui !important;
+    
     overflow: hidden;
     padding: 10px 0;
     margin: 0;
@@ -70,7 +56,6 @@ const Wrapper2 = styled.div`
     font-family: sans-serif;
     box-shadow: 0 -2px 4px 0 #e9e9eb;
     position: fixed;
-   /*  // top: 40%vh; */
     bottom: 0;
     left: 0;
     right: 0;
@@ -82,7 +67,7 @@ const Wrapper2 = styled.div`
 
 const Button = styled.button`
     box-shadow: 0 2px 8px #d4d5d9;
-    background-color: #fc8019;
+    background-color: #002D62;
     border-radius: 0px;
     border: none;
     line-height: 50px;
@@ -129,14 +114,12 @@ const AddressContainer = styled.button`
     }
 `;
 
-const AddLocation = styled.i`
+const AddLocation = styled.img`
     height: 25px;
     width: 25px;
-    color:black;
-    font-size:25px;
     vertical-align: inherit;
     margin-radius: 0px;
-    /* // box-shadow: 0 3px 5px 0 rgba(40, 44, 63, 0.4); */
+   
 `;
 
 const useStyles = makeStyles({
@@ -148,19 +131,19 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Location() {
+export default function TemporaryDrawer() {
     const history = useHistory();
     const [flatNo, setFlatNo] = useState('');
     const [landmark, setLandmark] = useState('');
     const [type, setType] = useState('');
     const classes = useStyles();
     const [state, setState] = React.useState({
-       left : false,
+        left: false,
     });
 
     const getUserLocation = () => {
-        /* console.log(getUserLocation); */
-        const data = JSON.parse(window.localStorage.getItem('CustomerCurrentLoc'));
+        console.log(getUserLocation);
+        const data = JSON.parse(localStorage.getItem('CustomerCurrentLoc'));
 
         const userLoc = {
             flat_no: flatNo,
@@ -171,14 +154,13 @@ export default function Location() {
             type: type,
         };
 
-        window.localStorage.setItem('CustomerCurrentLoc', JSON.stringify(userLoc));
+        localStorage.setItem('CustomerCurrentLoc', JSON.stringify(userLoc));
 
         setState({ ...state, left: false });
         history.push('/CheckoutPage');
     };
 
     const toggleDrawer = (anchor, open) => (event) => {
-        setState({ ...state, [anchor]: open });
         if (
             event.type === 'keydown' &&
             (event.key === 'Tab' || event.key === 'Shift')
@@ -186,7 +168,7 @@ export default function Location() {
             return;
         }
 
-        
+        setState({ ...state, [anchor]: open });
     };
 
     const list = (anchor) => (
@@ -213,18 +195,18 @@ export default function Location() {
                 </div>
             </Wrapper>
             <Middle className='container'>
-                <div className='row row-cols-1'>
-                    <div className='col'>
+                <div className='row'>
+                    <div className='col-lg-10'>
                         <MapContainer>
                             <Map />
                         </MapContainer>
                     </div>
                     <div
-                        className='col mt-5 pt-5'
-                        style={{
+                        className='col-lg-10 mt-5 pt-5'
+                        /* style={{
                             paddingLeft: '15px',
                             paddingRight: '15px',
-                        }}
+                        }} */
                     >
                         <TextField
                             label='Door/Flat No.'
@@ -241,11 +223,11 @@ export default function Location() {
                         />
                     </div>
                     <div
-                        className='col pt-2'
-                        style={{
+                        className='col-lg-10 pt-2'
+                        /* style={{
                             paddingLeft: '15px',
                             paddingRight: '15px',
-                        }}
+                        }} */
                     >
                         <TextField
                             label='Landmark'
@@ -261,7 +243,7 @@ export default function Location() {
                             }}
                         />
                     </div>
-                    <div className='col'>
+                    <div className='col-lg-10'>
                         <div className='container'>
                             <div className='row'>
                                 <Button2
@@ -306,20 +288,13 @@ export default function Location() {
 
     return (
         <div>
-            <Drawer
-                anchor={'left'}
-                open={state['left']}
-                //onClose={toggleDrawer('left', false)}
-            >
-                {list('left')}
-            </Drawer>
             <AddressContainer
                 type='button'
                 className='btn btn-md text-capitalize row py-3'
                 onClick={toggleDrawer('left', true)}
             >
                 <div className='col-1'>
-                    <AddLocation className="fas fa-map-marker-alt" />
+                {/* <i class="fas fa-map-marker-alt col-1" style={{color:"#002D62" ,fontSize:"20px",marginLeft:"none"}}></i> */}
                 </div>
                 <div className='col '>
                     <div className=' row row-cols-1'>
@@ -344,7 +319,13 @@ export default function Location() {
                     </div>
                 </div>
             </AddressContainer>
-            
+            <Drawer
+                anchor={'left'}
+                open={state['left']}
+                // onClose={toggleDrawer('left', false)}
+            >
+                {list('left')}
+            </Drawer>
         </div>
     );
 }

@@ -55,7 +55,7 @@ const SortRestaurants = (props) => {
     const [data, setData] = useState([]);
     const [totalRestaurants, setTotalRestaurants] = useState();
     const [filter, setFilter] = useState('');
-    const {lat ,long} = JSON.parse(window.localStorage.getItem("Coordinates"));
+    const customerData = JSON.parse(window.localStorage.getItem("customerData"));
     // useEffect(() => {
     // setFilter(props.filter);
     // }, []);
@@ -65,7 +65,7 @@ const SortRestaurants = (props) => {
         console.log('just checking', filter);
         var config = {
             method: 'get',
-            url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${lat},${long}/unit/km/subCategory/${props.filter}`,
+            url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${customerData.geometry.coordinates[1]},${customerData.geometry.coordinates[0]}/unit/km/subCategory/${props.filter}`,
             headers: {},
         };
 
@@ -74,6 +74,7 @@ const SortRestaurants = (props) => {
                 console.log('in use effect', response.data.garages);
                 setData(response.data.garages);
                 setTotalRestaurants(response.data.total);
+                console.log(totalRestaurants);
             })
             .catch(function (error) {
                 console.log(error.response.data);
@@ -83,7 +84,7 @@ const SortRestaurants = (props) => {
     const allData = () => {
         var config = {
             method: 'get',
-            url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${lat},${long}/unit/km/subCategory/${props.filter}`,
+            url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${customerData.geometry.coordinates[1]},${customerData.geometry.coordinates[0]}/unit/km/subCategory/${props.filter}`,
             headers: {},
         };
         
@@ -105,7 +106,7 @@ const SortRestaurants = (props) => {
     const filterData = (sort) => {
         var config = {
             method: 'get',
-            url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${lat},${long}/unit/km/subCategory/${props.filter}`,
+            url: `http://localhost:9000/api/v1/garages/garages-within/5/center/${customerData.geometry.coordinates[1]},${customerData.geometry.coordinates[0]}/unit/km/subCategory/${props.filter}`,
             headers: {},
         };
 
@@ -127,18 +128,15 @@ const SortRestaurants = (props) => {
                         className='row mb-0 pb-0'
                         style={{ borderBottom: '3px solid whitesmoke' }}
                     >
-                        <div className='col-md-8'>
+                        <div className='col-lg-8'>
                             <h3 className='text-left'>
                                 <button
                                     className='btn btn-sm'
                                     onClick={allData}
                                 >
-                                    <Equal
-                                        src='/Icons/equal.svg'
-                                        alt='restaurant'
-                                    />
+                                    <i class="fas fa-equals"></i>
                                 </button>
-                                {totalRestaurants} restaurants
+                                {totalRestaurants} Garages
                             </h3>
                         </div>
 

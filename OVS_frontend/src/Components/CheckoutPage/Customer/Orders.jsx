@@ -7,40 +7,31 @@ import { useSelector } from "react-redux";
 const Wrapper1 = styled.div`
     overflow: hidden;
     font-family: sans-serif;
-    /* // min-height: 100%; */
+    
     margin-top: 31px !important;
     padding-top: 15px;
     background: #fff !important;
     margin-top: 5.2%;
-    /* // padding-bottom: 10%; */
+    
     font-size: 14px;
     line-height: 1.2;
-   /*  // min-height: 100%; */
-    /* div {
-        // border: 1px solid red;
-    } */
-    /* box-shadow:  7px -7px 14px #b8b8ba, 
-             -7px 7px 14px #ffffff;
-             -7px -7px 14px #b8b8ba, 
-             7px 7px 14px #ffffff; */
+  
 `;
 
 const Wrapper2 = styled.div`
   overflow-x: hidden !important;
   overflow-y: scroll !important;
   font-family: sans-serif;
-  /* // min-height: 100%; */
+  
   margin-top: 0px !important;
   padding-top: 15px;
   background: #fff !important;
   margin-top: 5.2%;
-  /* // padding-bottom: 10%; */
+  
   font-size: 14px;
   line-height: 1.2;
   max-height: 623px;
-  /* div {
-    // border: 1px solid red;
-  } */
+  
 `;
 
 const Wrapper3 = styled.div`
@@ -115,7 +106,7 @@ const CouponWrapper = styled.div`
   cursor: pointer;
   border: 1px dashed #a9abb2;
   padding: 10px;
-  /* // margin: 20px; */
+  
   margin-right: 0px !important;
   margin-left: 0px !important;
   height: 55px;
@@ -158,15 +149,15 @@ const Orders = () => {
             )}
           </div>
           <div class="w-100"></div>
-          <div className="col">
+          {/* <div className="col">
             <SuggessionsWrapper className="row text-muted text-center">
               {" "}
               <Quotes src="/Icons/left.svg" alt="quotes" />
               <p className="mt-1">Any Suggestions? We will pass it on...</p>
             </SuggessionsWrapper>
-          </div>
+          </div> */}
           <div class="w-100"></div>
-          <div className="col">
+          {/* <div className="col">
             <NoContactWrapper className="row mt-0">
               <div className="form-check col-md-auto">
                 <input
@@ -191,12 +182,12 @@ const Orders = () => {
                 </Text>
               </div>
             </NoContactWrapper>
-          </div>
+          </div> */}
           <div class="w-100"></div>
           <div className="col">
             <CouponWrapper className="row text-muted text-center">
               {" "}
-              <img
+              {/* <img
                 src="percentage.svg"
                 alt="percentage"
                 width="20px"
@@ -204,7 +195,14 @@ const Orders = () => {
                   marginRight: "10px",
                   marginLeft: "5px",
                 }}
-              />{" "}
+              /> */}
+              <i class="fas fa-tag"style={{
+                  marginTop:"4px",
+                  marginRight: "10px",
+                  marginLeft: "5px",
+                  fontSize:"20px"
+                }}></i>
+              {" "}
               <Title className="mt-2">Apply Coupon</Title>
             </CouponWrapper>
           </div>

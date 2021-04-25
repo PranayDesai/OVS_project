@@ -9,24 +9,20 @@ const Wrapper = styled.div`
     background: #fff;
     margin-bottom: 20px;
     padding-top: 35px;
-    /* padding-right: 40px; */
+    
     padding-bottom: 39px;
-    /*  padding-left: 40px; */
-    div {
-       /*  // border: 1px solid red; */
-    }
+    
 `;
 
 const Logo = styled.div`
     left: -35px;
-    /* // top: 10px;
-    // position: absolute; */
+   
     width: 0px;
     height: 0px;
     background-color: #282c3f;
     box-shadow: 0 3px 5px 0 rgba(40, 44, 63, 0.4);
     top: -10px;
-  /*   // left: -30px; */
+  
     padding: 0px !important;
 `;
 
@@ -36,12 +32,9 @@ const Title = styled.p`
     color: #282c3f;
 `;
 
-const LocationIcon = styled.i`
+const LocationIcon = styled.img`
     height: 50px;
     width: 50px;
-    background-color:black;
-    border-radius:50%;
-    font-size:50px;
     vertical-align: inherit;
     margin-radius: 0px;
     box-shadow: 0 3px 5px 0 rgba(40, 44, 63, 0.4);
@@ -73,13 +66,9 @@ const AddressContainer = styled.button`
     }
 `;
 
-const AddLocation = styled.i`
+const AddLocation = styled.img`
     height: 25px;
     width: 25px;
-    color:white;
-    background-color:black;
-    border-radius:50%;
-    font-size:25px;
     vertical-align: inherit;
     margin-radius: 0px;
     /* // box-shadow: 0 3px 5px 0 rgba(40, 44, 63, 0.4); */
@@ -93,13 +82,12 @@ const Tick = styled.img`
 `;
 
 const Change = styled.button`
-    border: 1px solid #fc8019;
-    font-family: system-ui !important;
+    border: 1px solid #002D62;
     font-weight: 500;
     border-radius: 0px;
-    color: #fc8019;
+    color: #002D62;
     &:hover {
-        background-color: #fc8019;
+        background-color: #002D62;
         color: #fff !important;
     }
 `;
@@ -127,9 +115,7 @@ const CurrAddr = () => {
                 <div className='container'>
                     <AddressContainer type='button' className='row py-3'>
                         <div className='col-1'>
-                            <AddLocation
-                                className="fas fa-map-marker-alt"
-                            />
+                        <i class="fas fa-map-marker-alt col-1" style={{color:"#002D62" ,fontSize:"10px"}}></i>
                         </div>
                         <div className='col'>
                             <div className='row row-cols-1'>
@@ -145,7 +131,7 @@ const CurrAddr = () => {
                                         {addr.type} Address
                                     </div>
                                 </AddressText>
-                                <b className='col mb-1 text-left'>30 mins</b>
+                                
                                 <button
                                     type='button'
                                     className='col-8 btn btn-outline-success text-uppercase mt-2'
@@ -155,7 +141,7 @@ const CurrAddr = () => {
                                     }}
                                     onClick={AddrSelected}
                                 >
-                                    Deliver Here
+                                    Select 
                                 </button>
                             </div>
                         </div>
@@ -193,20 +179,13 @@ const Address = (props) => {
             <>
                 <Wrapper className='container'>
                     <div className='row'>
-                        <Logo className='col-1'>
-                            <LocationIcon
-                                className="fas fa-map-marker-alt"
-                            />
-                        </Logo>
+                    <i class="fas fa-map-marker-alt col-1" style={{color:"#002D62" ,fontSize:"2rem",marginTop:"5px"}}></i>
                         <div className='col-11'>
                             <div className='row '>
                                 <div className='col'>
                                     <Title>
                                         Delivery Address
-                                        <Tick
-                                            src='Icons/checkmark.svg'
-                                            alt='Check'
-                                        />
+                                        <i class="fas fa-check-circle" style={{color:"green",marginLeft:"10px"}}></i>
                                     </Title>
                                 </div>{' '}
                                 <div class='w-100'></div>
@@ -217,10 +196,7 @@ const Address = (props) => {
                                             className='row py-3'
                                         >
                                             <div className='col-1'>
-                                                <AddLocation
-                                                    src='Icons/location.svg'
-                                                    alt='placeholder'
-                                                />
+                                            <i class="fas fa-map-marker-alt col-1" style={{color:"#002D62" ,fontSize:"10px"}}></i>
                                             </div>
                                             <div className='col'>
                                                 <div className='row row-cols-1'>
@@ -237,9 +213,7 @@ const Address = (props) => {
                                                             {addr.type} Address
                                                         </div>
                                                     </AddressText>
-                                                    <b className='col mb-1 text-left'>
-                                                        30 mins
-                                                    </b>
+                                                    
                                                 </div>
                                             </div>
                                         </AddressContainer>
@@ -266,11 +240,9 @@ const Address = (props) => {
                 <>
                     <Wrapper className='container'>
                         <div className='row'>
-                            <Logo className='col-1'>
-                            <LocationIcon
-                                className="fas fa-map-marker-alt"
-                            />
-                            </Logo>
+                            
+                            <i class="fas fa-map-marker-alt col-1" style={{color:"#002D62" ,fontSize:"2rem",marginTop:"5px"}}></i>
+                            
                             <div className='col-11'>
                                 <div className='row '>
                                     <div className='col'>
@@ -279,9 +251,8 @@ const Address = (props) => {
                                     <div class='w-100'></div>
                                     {localStorage.getItem(
                                         'CustomerCurrentLoc',
-                                    ) === null ? (
+                                    ) == null ? (
                                         <div className='col-5 '>
-                                            {console.log("inside location")}
                                             <Location />
                                         </div>
                                     ) : (
