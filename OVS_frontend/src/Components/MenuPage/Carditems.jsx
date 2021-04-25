@@ -74,33 +74,7 @@ function Carditems(props) {
       <div className="row">
         <div className="col-9 justify-content-between">
           <div className="row">
-            <div className="col-1">
-              {data.veg ? (
-                <div
-                  className="mt-3"
-                  style={{
-                    border: "1px solid green",
-                    width: "15px",
-                    height: "15px",
-                    marginLeft: "11%",
-                  }}
-                >
-                  <div className="veg"></div>
-                </div>
-              ) : (
-                <div
-                  className="mt-3"
-                  style={{
-                    border: "1px solid red",
-                    width: "15px",
-                    height: "15px",
-                    marginLeft: "11%",
-                  }}
-                >
-                  <div className="nonVeg"></div>
-                </div>
-              )}
-            </div>
+           
             <div className="col-6 mt-2">
               <small className="mt-5 text-dark">{data.name}</small>
             </div>

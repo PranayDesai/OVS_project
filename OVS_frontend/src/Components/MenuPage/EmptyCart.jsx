@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import toolbox from '../../Pics and logo/MenuPage/toolbox.png';
 import { useDispatch, useSelector } from "react-redux";
 
 const Wrapper = styled.div`
@@ -25,7 +26,7 @@ function EmptyCart() {
           <div className="col-10">
             <h6 className="mb-4 mt-4">Cart Empty</h6>
             <img
-              src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_480/Cart_empty_-_menu_2x_ejjkf2"
+              src={toolbox}
               alt="empty cart"
               className="w-100"
             />

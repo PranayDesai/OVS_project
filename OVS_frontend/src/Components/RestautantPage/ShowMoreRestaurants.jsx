@@ -42,6 +42,7 @@ const Title = styled.div`
 
 const ShowMoreRestaurants = (props) => {
     const [filter, setFilter] = useState('');
+    console.log(props);
     // const { filter } = props.location.filter;
     useEffect(() => {
         if (
@@ -58,11 +59,11 @@ const ShowMoreRestaurants = (props) => {
     // console.log('props.location.filter', props.location.filter, filter);
     return (
         <>
-            <Navigator />
+            {/* <Navigator /> */}
             <Wrapper>
                 <div className='container-fluid' style={{ width: '90%' }}>
                     <div className='row row-cols-1'>
-                        {filter === 'top_pick' ? (
+                        {filter === 'top-pick' ? (
                             <Title className='col row-cols-1'>
                                 <div className='row'>
                                     <div className='col text-left'>
@@ -75,38 +76,37 @@ const ShowMoreRestaurants = (props) => {
                                     </h4>
                                 </div>
                             </Title>
-                        ) : filter === 'veg' ? (
+                        ) : filter === 'four-wheeler-only' ? (
                             <Title className='col row-cols-1'>
                                 <div className='row'>
                                     <div className='col text-left'>
-                                        veg only
+                                        Four Wheelers Only
                                     </div>
                                     <div class='w-100'></div>
                                     <h4 className='col text-left'>
-                                        Popular vegetarian restaurants near you
+                                        Popular Four Wheeler Garages near you
                                     </h4>
                                 </div>
                             </Title>
-                        ) : filter === 'newly_added' ? (
+                        ) : filter === 'newly-added' ? (
                             <Title className='col row-cols-1'>
                                 <div className='row'>
-                                    <div className='col text-left'>Premium</div>
+                                    <div className='col text-left'>Newly Added</div>
                                     <div class='w-100'></div>
                                     <h4 className='col text-left'>
-                                        Premium restaurants for near you
+                                        Newly Added Garages in your area
                                     </h4>
                                 </div>
                             </Title>
                         ) : (
-                            <Title className='col row-cols-1'>
+                            <Title className='col-lg-12 '>
                                 <div className='row'>
-                                    <div className='col text-left'>
-                                        Exclusive
+                                    <div className='col-lg-12 text-left'>
+                                        Two Wheeler Only
                                     </div>
                                     <div class='w-100'></div>
                                     <h4 className='col text-left'>
-                                        Swiggy only Exclusive restaurants near
-                                        you
+                                    Popular Two Wheeler Garages Near You
                                     </h4>
                                 </div>
                             </Title>

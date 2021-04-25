@@ -83,35 +83,10 @@ class LandingUpper extends Component {
   };
 
   goTo = () => {
-    this.props.history.push("/Restaurent");
+    this.props.history.push("/Restaurants");
   };
 
-  /* getButtons=()=>{
-    
-    this.userData === null ?
-                  <div>
-                  <div
-                    className="col-lg-2 btn btn-lg align-self-center font-weight-bold "
-                    style={{ textAlign: "right" }}
-                  >
-                    <LoginDrawer />
-                    
-                  </div>
-                  <div
-                    className="col-lg-3 btn btn-lg align-self-center font-weight-bold"
-                    style={{
-                      // border: '1px solid red',
-                      textAlign: "left",
-                    }}
-                  >
-                    <RegisterDrawer />
-                  </div>
-                  </div>
-                  : 
-                  <Link exact to="/my-account">
-                    <Button variant="outlined">{ this.userData.user.name}</Button>
-                  </Link>
-  } */
+
 
   render() {
     return (
@@ -127,7 +102,8 @@ class LandingUpper extends Component {
                   </div>
                  {this.state.button ?
                  <Link exact to="/my-account">
-                  <Button variant="contained" color="primary">{this.state.button.name}</Button>
+                   
+                  <Button variant="outlined" color="primary" style={{color:"black",border:"black 1px solid"}}>{this.state.button.name}</Button>
                   </Link>
                   :<> 
                   <div

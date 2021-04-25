@@ -11,7 +11,7 @@ const Wrapper = styled.div`
         margin-bottom: 5px;
         font-weight: bold;
         &:hover {
-            color: #fc8019;
+            color: #002D62;
         }
     }
 `;

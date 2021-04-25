@@ -54,9 +54,13 @@ const Wrapper = styled.div`
   .addCart {
     font-size: 0.9rem;
     font-weight: 600;
-    margin-top: -25px;
+    margin-top: 40px;
     background: white;
-    margin-left: 30px;
+    margin-left: 90px;
+  }
+
+  &:hover .addCart{
+    cursor:pointer
   }
 
   .buttoncart {
@@ -98,30 +102,7 @@ function RestaurantCards(props) {
     <Wrapper>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-7 mt-5">
-            {data.veg ? (
-              <div
-                className="p-1"
-                style={{
-                  border: "1px solid green",
-                  width: "20px",
-                  marginLeft: "11%",
-                }}
-              >
-                <div className="veg"></div>
-              </div>
-            ) : (
-              <div
-                className="p-1"
-                style={{
-                  border: "1px solid red",
-                  width: "20px",
-                  marginLeft: "11%",
-                }}
-              >
-                <div className="nonVeg"></div>
-              </div>
-            )}
+          <div className="col-lg-7 mt-3">
 
             <div style={{ marginLeft: "11%" }}>
               <h6 className="mt-2">{data.name}</h6>
@@ -134,25 +115,26 @@ function RestaurantCards(props) {
             </div>
           </div>
           <div className="col-lg-5 mt-4 mb-5 position-relative">
-            <img src={data.img_url} alt="item" className="p-2" />
+            {/* <img src={data.img_url} alt="item" className="p-2" /> */}
             <div>
               {productInCart && productInCart.qty === 0 ? (
                 <div
                   className="addCart col-5 text-center py-2 text-success"
                   onClick={() => handleAdd(data)}
+                  style={{border:"1px solid green"}}
                 >
                   ADD
                 </div>
               ) : (
                 <div className="addCart">
                   <button className="buttoncart" onClick={() => handleDec()}>
-                    -
+                  <i class="fas fa-minus"></i>
                   </button>
                   <button className="buttoncart">
-                    {productInCart && productInCart.qty}
+                    <span style={{fontWeight: "400"}}>{productInCart && productInCart.qty}</span>
                   </button>
                   <button className="buttoncart" onClick={() => handleInc()}>
-                    +
+                  <i class="fas fa-plus"></i>
                   </button>
                 </div>
               )}

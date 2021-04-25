@@ -33,20 +33,20 @@ const CheckoutPage = (props) => {
 
     return (
         <>
-            <CheckoutNavigator />
+            {/* <CheckoutNavigator /> */}
             <Wrapper className='container-fluid'>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-8'>
-                            <div className='row row-cols-1 text-left'>
-                                <div className='col'>
+                            <div className='row  text-left'>
+                                <div className='col-lg-8'>
                                     <Login />
                                 </div>
-                                <div className='col'>
+                                <div className='col-lg-8'>
                                     <Address flag={isAddrSelected} />
                                 </div>
                                 {isAddrSelected ? (
-                                    <div className='col'>
+                                    <div className='col-lg-8'>
                                         <Payment />
                                     </div>
                                 ) : (
