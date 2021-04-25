@@ -81,7 +81,7 @@ exports.login = catchAsync(async (request, response, next) => {
       return next(new AppError('User does not exist! Need to Register', 404));
     response.status(200).json({
       status: 'success',
-      data: user,
+      data: user[0],
     });
   } else {
     return next(new AppError('Invalid OTP!', 404));
