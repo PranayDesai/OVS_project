@@ -6,7 +6,7 @@ import Address from './Customer/Address';
 import Payment from './Customer/Payment';
 import Orders from './Customer/Orders';
 import MainFooter from '../LandingPage/MainFooter';
-// import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Wrapper = styled.div`
     overflow: hidden;
@@ -18,9 +18,7 @@ const Wrapper = styled.div`
     font-size: 14px;
     line-height: 1.2;
     min-height: 100%;
-    /* div {
-        // border: 1px solid red;
-    } */
+   
 `;
 
 const CheckoutPage = (props) => {

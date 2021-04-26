@@ -47,7 +47,7 @@ const Li = styled.li`
 `;
 
 const Name = styled.div`
-    /* // border: 1px solid red; */
+    
     font-size: 16px !important;
     font-weight: 500 !important;
     color: red !important;

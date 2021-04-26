@@ -39,8 +39,8 @@ const Hotel = () => {
         setHotelImg(JSON.parse(localStorage.getItem('hotel')).img_url);
         setHotelArea(
             () =>
-                `${JSON.parse(localStorage.getItem('Coordinates')).area}, ${
-                    JSON.parse(localStorage.getItem('Coordinates')).place_name
+                `${JSON.parse(localStorage.getItem('customerData')).geometry.area}, ${
+                    JSON.parse(localStorage.getItem('customerData')).geometry.place_name
                 }`,
         );
     });
