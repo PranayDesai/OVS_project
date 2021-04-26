@@ -108,6 +108,13 @@ const garagesSchema = new mongoose.Schema(
   }
 );
 
+//Virtual populate for garage orders
+garagesSchema.virtual('orders', {
+  ref: 'Order',
+  foreignField: 'garage',
+  localField: '_id',
+});
+
 //Garages index
 garagesSchema.index({ geometry: '2dsphere' });
 

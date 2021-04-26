@@ -5,12 +5,12 @@ const APIFeatures = require('../utils/API_Features');
 
 exports.getUser = async (request, response) => {
   try {
-    const user = await Users.find({
-      phonenumber: request.params.id * 1,
-    });
+    const user = await Users.findById(request.params.id).populate('orders');
+    if (!user)
+      return next(new AppError('User with this id does not exist', 404));
     response.status(200).json({
       status: 'success',
-      user,
+      data: user,
     });
   } catch (err) {
     response.status(404).json({

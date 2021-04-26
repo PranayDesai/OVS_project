@@ -4,18 +4,21 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 const app = require('./app');
 const mongoose = require('mongoose');
-
-//CONNECT DATABASE ON_LINE
-// const DB = process.env.DATABASE.replace(
-//   '<password>',
-//   process.env.DATABASE_PASSWORD
-// );
-
-//CONNECT DATABASE OFF_LINE
-const DB = process.env.DATABASE_LOCAL.replace(
-  '<password>',
-  process.env.DATABASE_PASSWORD
-);
+let DB;
+//CONNECT DATABASE ON_LINE or OFFLINE
+process.argv.forEach((argv) => {
+  if (argv === '--online') {
+    DB = process.env.DATABASE.replace(
+      '<password>',
+      process.env.DATABASE_PASSWORD
+    );
+  } else {
+    DB = process.env.DATABASE_LOCAL.replace(
+      '<password>',
+      process.env.DATABASE_PASSWORD
+    );
+  }
+});
 mongoose
   .connect(DB, {
     useNewUrlParser: true,

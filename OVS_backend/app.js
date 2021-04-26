@@ -8,6 +8,7 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const gargesRouter = require('./routes/garagesRouter');
 const usersRouter = require('./routes/usersRouter');
+const ordersRouter = require('./routes/ordersRouter');
 
 // MIDDLE_WARE
 app.use(cors({ origin: '*' }));
@@ -19,6 +20,7 @@ app.use(morgan('dev'));
 // ROUTES
 app.use('/api/v1/garages', gargesRouter);
 app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/orders', ordersRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

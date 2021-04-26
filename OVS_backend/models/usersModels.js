@@ -1,50 +1,89 @@
 const mongoose = require('mongoose');
 
-const usersSchema = new mongoose.Schema({
-  name: {
+const address = mongoose.Schema({
+  flat_no: {
     type: String,
-    required: [true, 'A user must have name'],
+    required: [true, 'A address must have flat_no'],
   },
-  password: {
+  landmark: {
     type: String,
-    required: [true, 'A user must have password'],
-    minlength: [6, 'A user password must have more than 6 characters'],
-    select: false,
+    required: [true, 'A address must have landmark'],
   },
-  email: {
-    type: String,
-    required: [true, 'A user must have email'],
-    unique: true,
-    lowerCase: true,
-  },
-  phonenumber: {
+  lat: {
     type: Number,
-    required: [true, 'A user must have phone number'],
-    unique: true,
-    minlength: [10, 'A user phone number invalid'],
-    maxlength: [10, 'A user phone number invalid'],
+    required: true,
   },
-  geometry: {
-    // GeoJSON
-    type: {
-      type: String,
-      default: 'Point',
-      enum: ['Point'],
-    },
-    coordinates: {
-      type: [Number],
-      default: [72.611528, 22.998554],
-    },
-    area: {
-      type: String,
-      default: 'Maninagar',
-    },
-    place_name: {
-      type: String,
-      default: 'Ahmedabad, Gujarat',
-    },
-    required: false,
+  long: {
+    type: Number,
+    required: true,
   },
+  place_name: {
+    type: String,
+    required: true,
+  },
+});
+
+const usersSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'A user must have name'],
+    },
+    password: {
+      type: String,
+      required: [true, 'A user must have password'],
+      minlength: [6, 'A user password must have more than 6 characters'],
+      select: false,
+    },
+    email: {
+      type: String,
+      required: [true, 'A user must have email'],
+      unique: true,
+      lowerCase: true,
+    },
+    phonenumber: {
+      type: Number,
+      required: [true, 'A user must have phone number'],
+      unique: true,
+      minlength: [10, 'A user phone number invalid'],
+      maxlength: [10, 'A user phone number invalid'],
+    },
+    geometry: {
+      // GeoJSON
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point'],
+      },
+      coordinates: {
+        type: [Number],
+        default: [72.611528, 22.998554],
+      },
+      area: {
+        type: String,
+        default: 'Maninagar',
+      },
+      place_name: {
+        type: String,
+        default: 'Ahmedabad, Gujarat',
+      },
+      required: false,
+    },
+    addressList: {
+      type: [address],
+    },
+  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+
+//Virtual populate for user orders
+usersSchema.virtual('orders', {
+  ref: 'Order',
+  foreignField: 'user',
+  localField: '_id',
 });
 
 const Users = mongoose.model('User', usersSchema);

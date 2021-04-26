@@ -3,15 +3,25 @@ const APIFeatures = require('../utils/API_Features');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-exports.getAllGarages = catchAsync(async (request, response) => {
+exports.getAllGarages = catchAsync(async (request, response, next) => {
   const features = new APIFeatures(Garages.find(), request.query);
   features.filter().sort().limitFields().paginate();
   const garages = await features.query;
-
+  if (!garages) return next('Sorry no garges in result', 404);
   response.status(200).json({
     status: 'success',
     results: garages.length,
     garages,
+  });
+});
+
+exports.getGarage = catchAsync(async (request, response, next) => {
+  const garage = await Garages.findById(request.params.id).populate('orders');
+  if (!garage)
+    return next(new AppError('Garage with this id does not exist', 404));
+  response.status(200).json({
+    status: 'success',
+    data: garage,
   });
 });
 
