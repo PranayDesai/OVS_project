@@ -114,8 +114,8 @@ const Map = () => {
                     onGeolocate={(e) => {
                         console.log('onGeolocate', e);
                         setCustomerCoords({
-                            lat: e.coords.latitude,
-                            long: e.coords.longitude,
+                            lat: data.lat,
+                            long: data.long,
                         });
                     }}
                 />
