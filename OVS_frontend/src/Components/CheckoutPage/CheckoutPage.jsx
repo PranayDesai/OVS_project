@@ -7,6 +7,8 @@ import Payment from './Customer/Payment';
 import Orders from './Customer/Orders';
 import MainFooter from '../LandingPage/MainFooter';
 import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const Wrapper = styled.div`
     overflow: hidden;
@@ -24,10 +26,49 @@ const Wrapper = styled.div`
 const CheckoutPage = (props) => {
     console.log(props.location.isAddrSelected);
     const [isAddrSelected, setIsAddrSelected] = useState(false);
+    const history = useHistory();
+    const customerData = JSON.parse(window.localStorage.getItem("customerData"));
+    const cart = JSON.parse(window.localStorage.getItem("cart"));
+    const CustomerCurrentLoc = JSON.parse(window.localStorage.getItem("CustomerCurrentLoc"));
+    const garage = JSON.parse(window.localStorage.getItem("hotel"));
 
     useEffect(() => {
         setIsAddrSelected(props.location.isAddrSelected || false);
     }, [props.location.isAddrSelected]);
+
+const goToMyAccount = ()=>{
+    
+    if(customerData && cart && CustomerCurrentLoc && garage){
+        axios.post("http://localhost:9000/api/v1/orders",{
+            user_id:customerData._id,
+            garage_id:garage._id,
+            userAddress:{
+                flat_no:CustomerCurrentLoc.flat_no,
+                landmark:CustomerCurrentLoc.landmark,
+                lat:CustomerCurrentLoc.lat,
+                long:CustomerCurrentLoc.long,
+                place_name:CustomerCurrentLoc.place_name
+            },
+            serviceList:cart.map(c=>{
+                return {
+                category:c.category,
+                name: c.name,
+		        price:c.price,
+		        description:c.description,
+		        img_url: c.img_url,
+		        qty: c.qty
+                }
+            }),
+            orderStatus:"pending"
+        }).then((res)=>{history.push({pathname:"/my-account"})}
+             
+        ).catch((err)=>{
+            console.log(err.response.data.message);
+        })
+        
+    }
+    
+}
 
     return (
         <>
@@ -44,9 +85,7 @@ const CheckoutPage = (props) => {
                                     <Address flag={isAddrSelected} />
                                 </div>
                                 {isAddrSelected ? (
-                                    <div className='col-11'>
-                                        <Payment />
-                                    </div>
+                                    goToMyAccount()
                                 ) : (
                                     <div className="col-11"></div>
                                 )}

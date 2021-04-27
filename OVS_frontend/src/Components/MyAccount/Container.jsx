@@ -43,27 +43,34 @@ font-size:2rem;
 }
 `;
 
-const Container = () => {
-    const [data, setData] = useState({});
-
-   /*  useEffect(() => {
+const Container = (props) => {
+    /* const [data, setData] = useState({}); */
+/* 
+    useEffect(() => {
         const id = JSON.parse(localStorage.getItem('customerData'))._id;
         var config = {
             method: 'get',
-            url: `http://localhost:5000/api/customer/order/${id}`,
+            url: `http://localhost:9000/api/v1/users/${id}`,
             headers: {},
         };
 
         axios(config)
             .then(function (response) {
-                console.log(JSON.stringify(response.data));
-                setData(response.data);
+                console.log(response.data,"inside container");
+                setData(response.data.data);
+                
             })
             .catch(function (error) {
-                console.log(error.response.data);
+                // console.log(error.response.data);
             });
-    }, []);
-    console.log(data); */
+    }, []); */
+    /* useEffect(()=>{
+    setData(props);
+    console.log(data,"inside container");
+    }) */
+    
+    const data = props.data;
+    console.log(data);
     return (
         <Wrapper>
             <div className='container-fluid p-5' style={{ width: '94%' }}>
@@ -124,9 +131,9 @@ const Container = () => {
                         </div>
                         <div className='w-100'></div>
                         <div className='col row-cols-1'>
-                            {data.orders &&
-                                data.orders
-                                    .map((item) => <OrderCard data={item} />)}
+                            
+                            {data &&
+                                data.map((item) => <OrderCard data={item} />)}
                         </div>
                     </div>
                 </div>

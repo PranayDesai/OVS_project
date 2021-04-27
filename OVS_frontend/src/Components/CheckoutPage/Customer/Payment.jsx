@@ -13,9 +13,7 @@ const Wrapper = styled.div`
     margin-bottom: 20px;
     padding-top: 35px;
     padding-bottom: 39px;
-   /*  div {
-        // border: 1px solid red;
-    } */
+   
 `;
 
 const Logo = styled.div`

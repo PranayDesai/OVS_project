@@ -110,7 +110,7 @@ function HomeDummy() {
   const userData = JSON.parse(window.localStorage.getItem("customerData"));
   
   
-  const getData = (filter) => {
+  const getData =  (filter) => {
     var config = {
       method: "get",
       // url: `${process.env.REACT_APP_API_URL}/api/restaurant?lat=12.9259&lng=77.6229&filter=${filter}&page=1&limit=5`,

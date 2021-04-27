@@ -57,27 +57,30 @@ const Edit = styled.button`
 `;
 
 const MyAccountPage = () => {
-    /* const [data, setData] = useState({}); */
+    const [data, setData] = useState({});
     const id = JSON.parse(localStorage.getItem('customerData'))._id;
-    const data =JSON.parse(localStorage.getItem('customerData'));
-    console.log(data);
-    /* useEffect(() => {
+    
+    
+    
+    useEffect(() => {
         var config = {
             method: 'get',
-            url: `http://localhost:5000/api/customer/order/${id}`,
+            url: `http://localhost:9000/api/v1/users/${id}`,
             headers: {},
         };
 
         axios(config)
             .then(function (response) {
-                console.log(JSON.stringify(response.data));
-                setData(response.data);
+                
+                setData(response.data.data);
+                console.log(data);
+                
             })
             .catch(function (error) {
-                console.log(error.response.data);
+                console.log(error);
             });
     }, []);
-    console.log(data); */
+    
     return (
         <>
             <MyAccNavigator />
@@ -124,7 +127,7 @@ const MyAccountPage = () => {
                             }}
                         >
                             {' '}
-                            <Container />
+                            <Container data={data.orders}/>
                         </div>
                     </div>
                 </div>

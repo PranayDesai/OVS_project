@@ -90,19 +90,19 @@ const Help = styled.button`
 `;
 
 const OrderCard = (props) => {
-    const { data } = props;
-    console.log('orders', data);
+    const  data  = props.data;
+    console.log(data);
     return (
         <Wrapper className='container text-left mb-5'>
             <div className='row p-4'>
                 <div className='col-3 pl-0'>
-                    <Image src={data.image_url} alt='Hotel' />
+                   {/*  <Image src={data.image_url} alt='Hotel' /> */}
                 </div>
                 <div className='col row-cols-1 pl-0'>
                     <div className='col'>
                         <div className='row justify-content-between'>
                             <div className='col-md-auto'>
-                                <Name>{data.restaurant_name}</Name>
+                                <Name>{data.garage.name}</Name>
                             </div>
                             <div className='col-md-auto text-right mt-1 text-muted'>
                                 Delivered
@@ -112,7 +112,7 @@ const OrderCard = (props) => {
                     </div>
                     <div className='col text-capitalize text-muted'>
                         <Info>
-                            ORDER #{data._id} | {data.date}
+                            ORDER #{data._id} | {data.createdAt}
                         </Info>
                     </div>
                     <div className='col text-uppercase mt-3'>
@@ -126,9 +126,9 @@ const OrderCard = (props) => {
                     style={{ border: '1px dashed #d4d5d9' }}
                 ></div>
                 <div className='col' style={{ fontWeight: 300 }}>
-                    {data.items.map((item) => (
+                    {/* {data.serviceList.map((item) => (
                         <BillItems data={item} />
-                    ))}
+                    ))} */}
                 </div>
 
                 <div className='col'>
@@ -138,10 +138,10 @@ const OrderCard = (props) => {
                             style={{ borderTop: '2px solid #d4d5d9' }}
                         >
                             Total Paid: ₹{' '}
-                            {data.items.reduce(
-                                (a, b) => a + b.quantity * b.price,
+                            {/* {data.serviceList.reduce(
+                                (a, b) => a + b.qty * b.price,
                                 50,
-                            )}
+                            )} */}
                         </div>
                     </div>
                 </div>
