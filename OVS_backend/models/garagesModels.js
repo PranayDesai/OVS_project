@@ -52,7 +52,7 @@ const garagesSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A garage must have password'],
       minlength: [6, 'A garage password must have more than 6 characters'],
-      select: true,
+      select: false,
     },
     categories: {
       type: [String],
@@ -80,9 +80,14 @@ const garagesSchema = new mongoose.Schema(
     },
     ratingsAverage: {
       type: Number,
+      default: 4.5,
     },
     img_url: {
       type: String,
+    },
+    ratingsQuantity: {
+      type: Number,
+      default: 0,
     },
     geometry: {
       // GeoJSON

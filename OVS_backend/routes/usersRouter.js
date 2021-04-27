@@ -8,9 +8,12 @@ usersRouter.route('/').get(usersControllers.getAllUser);
 usersRouter.route('/addUser').post(authControllers.addUser);
 usersRouter.route('/verifyUser').post(authControllers.verifyUser);
 usersRouter
+  .route('/getAddress/:latitude/:longitude')
+  .get(usersControllers.getUserAddress);
+usersRouter.route('/loginVerify').post(authControllers.loginVerify);
+usersRouter.route('/login').post(authControllers.login);
+usersRouter
   .route('/:id')
   .get(usersControllers.getUser)
   .patch(usersControllers.updateUser);
-usersRouter.route('/loginVerify').post(authControllers.loginVerify);
-usersRouter.route('/login').post(authControllers.login);
 module.exports = usersRouter;

@@ -2,10 +2,12 @@ const Users = require('../models/usersModels');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/API_Features');
-
+const axios = require('axios');
 exports.getUser = async (request, response) => {
   try {
-    const user = await Users.findById(request.params.id).populate('orders');
+    const user = await Users.findById(request.params.id)
+      .populate('orders')
+      .populate('reviews');
     if (!user)
       return next(new AppError('User with this id does not exist', 404));
     response.status(200).json({
@@ -51,4 +53,25 @@ exports.getAllUser = catchAsync(async (request, response, next) => {
     results: users.length,
     users,
   });
+});
+
+exports.getUserAddress = catchAsync(async (request, response, next) => {
+  let { latitude, longitude } = request.params;
+  let API_URL = `https://apis.mapmyindia.com/advancedmaps/v1/abmmijbxyarfzoxzgjvs2q4fkxsny9vk/rev_geocode?lat=${latitude}&lng=${longitude}`;
+  let result = await axios.get(API_URL);
+  if (!result) return next(new AppError('Can get to api map my india'));
+  let { locality, formatted_address } = result.data.results[0];
+  if (locality && formatted_address) {
+    latitude = parseFloat(parseFloat(latitude).toFixed(6));
+    longitude = parseFloat(parseFloat(longitude).toFixed(6));
+    response.status(200).json({
+      status: 'success',
+      data: {
+        lat: latitude,
+        long: longitude,
+        area: locality,
+        place: formatted_address,
+      },
+    });
+  }
 });

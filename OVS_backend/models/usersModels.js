@@ -72,6 +72,10 @@ const usersSchema = new mongoose.Schema(
     addressList: {
       type: [address],
     },
+    img_url: {
+      type: String,
+      default: '',
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -82,6 +86,13 @@ const usersSchema = new mongoose.Schema(
 //Virtual populate for user orders
 usersSchema.virtual('orders', {
   ref: 'Order',
+  foreignField: 'user',
+  localField: '_id',
+});
+
+//Virtual populate for user reviews
+usersSchema.virtual('reviews', {
+  ref: 'Review',
   foreignField: 'user',
   localField: '_id',
 });
