@@ -9,16 +9,10 @@ const Wrapper = styled.div`
     color: #171a29;
     font-family: sans-serif;
     border: 1px solid #d4d5d9;
-    /* div {
-        // border: 1px solid red;
-    } */
 `;
 
 const Image = styled.img`
     width: inherit;
-    /* // height: 150px;
-    // padding-left: 0px;
-    // padding-right: 0px; */
 `;
 
 const Tick = styled.img`
@@ -32,21 +26,16 @@ const Name = styled.p`
     font-size: 20px;
     font-weight: 500;
     color: #171a29;
-    /* // display: inline-block;
-    // line-height: 2rem; */
     margin-bottom: 0px;
     cursor: pointer;
     &:hover {
-        color: #fc8019;
+        color: #002D62;
     }
 `;
 
 const Info = styled.p`
     font-size: 15px;
     font-weight: 400;
-   /*  // color: #171a29;
-    // display: inline-block;
-    // line-height: 2.5rem; */
     margin-bottom: 0px;
     cursor: pointer;
 `;
@@ -54,9 +43,7 @@ const Info = styled.p`
 const Dets = styled.p`
     font-size: 16px;
     font-weight: 600;
-    color: #fc8019;
-    /* // display: inline-block;
-    // line-height: 2.5rem; */
+    color: #002D62;
     margin-bottom: 0px;
     cursor: pointer;
     &:hover {
@@ -69,7 +56,7 @@ const Reorder = styled.button`
     font-weight: 600;
     border-radius: 0px;
     color: #fff;
-    background: #fc8019;
+    background: #002D62;
     &:hover {
         box-shadow: 0 2px 8px #d4d5d9;
         color: #fff;
@@ -80,23 +67,22 @@ const Help = styled.button`
     font-size: 16px;
     font-weight: 600;
     border-radius: 0px;
-    border: 1px solid #fc8019;
-    color: #fc8019;/* 
-    // background: #fc8019; */
+    border: 1px solid #002D62;
+    color: #002D62;
     &:hover {
         box-shadow: 0 2px 8px #d4d5d9;
-        color: #fc8019;
+        color: #002D62;
     }
 `;
 
 const OrderCard = (props) => {
-    const  data  = props.data;
-    console.log(data);
+    const { data } = props;
+    console.log('orders', data);
     return (
         <Wrapper className='container text-left mb-5'>
             <div className='row p-4'>
                 <div className='col-3 pl-0'>
-                   {/*  <Image src={data.image_url} alt='Hotel' /> */}
+                    {/* <Image src={data.image_url} alt='Hotel' /> */}
                 </div>
                 <div className='col row-cols-1 pl-0'>
                     <div className='col'>
@@ -105,8 +91,8 @@ const OrderCard = (props) => {
                                 <Name>{data.garage.name}</Name>
                             </div>
                             <div className='col-md-auto text-right mt-1 text-muted'>
-                                Delivered
-                                <Tick src='Icons/checkmark.svg' alt='Check' />
+                                Work completed
+                                <i class="fas fa-check-circle" style={{color:"green",marginLeft:"10px"}}></i>
                             </div>
                         </div>
                     </div>
@@ -126,9 +112,9 @@ const OrderCard = (props) => {
                     style={{ border: '1px dashed #d4d5d9' }}
                 ></div>
                 <div className='col' style={{ fontWeight: 300 }}>
-                    {/* {data.serviceList.map((item) => (
+                    {data.serviceList.map((item) => (
                         <BillItems data={item} />
-                    ))} */}
+                    ))}
                 </div>
 
                 <div className='col'>
@@ -138,10 +124,10 @@ const OrderCard = (props) => {
                             style={{ borderTop: '2px solid #d4d5d9' }}
                         >
                             Total Paid: ₹{' '}
-                            {/* {data.serviceList.reduce(
+                            {data.serviceList.reduce(
                                 (a, b) => a + b.qty * b.price,
                                 50,
-                            )} */}
+                            )}
                         </div>
                     </div>
                 </div>

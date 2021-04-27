@@ -8,14 +8,9 @@ const Wrapper = styled.div`
     letter-spacing: 0;
     color: #171a29;
     font-family: sans-serif;
-    /* // border: 1px solid red;
-    div {
-        // border: 1px solid red;
-    } */
 `;
 
 const Title = styled.p`
-    /* // color: #282c3f; */
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
@@ -23,7 +18,6 @@ const Title = styled.p`
     padding-top: 20px;
     margin-bottom: 0px;
     padding-bottom: 20px;
-    /* // border: 1px solid red; */
     &:hover {
         color: #171a29;
         font-size: 17px;
@@ -43,9 +37,9 @@ font-size:2rem;
 }
 `;
 
-const Container = (props) => {
-    /* const [data, setData] = useState({}); */
-/* 
+const Container = () => {
+    const [data, setData] = useState({});
+
     useEffect(() => {
         const id = JSON.parse(localStorage.getItem('customerData'))._id;
         var config = {
@@ -56,27 +50,19 @@ const Container = (props) => {
 
         axios(config)
             .then(function (response) {
-                console.log(response.data,"inside container");
                 setData(response.data.data);
-                
             })
             .catch(function (error) {
-                // console.log(error.response.data);
+                /* console.log(error.response.data); */
             });
-    }, []); */
-    /* useEffect(()=>{
-    setData(props);
-    console.log(data,"inside container");
-    }) */
-    
-    const data = props.data;
-    console.log(data);
+    }, []);
+  /*   console.log(data); */
     return (
         <Wrapper>
             <div className='container-fluid p-5' style={{ width: '94%' }}>
                 <div className='row'>
                     <div
-                        className='col-12 text-left pt-4 pb-4 pl-4 pr-0 text-capitalize'
+                        className='col row-cols-1 text-left pt-4 pb-4 pl-4 pr-0 text-capitalize'
                         style={{
                             background: '#edf1f7',
                             maxWidth: '280px',
@@ -94,8 +80,8 @@ const Container = (props) => {
                                     color: '#171a29',
                                 }}
                             >
-                                <Icon className="fas fa-wrench"  />
-                                orders
+                                 <Icon className="fas fa-wrench"  />
+                                Orders
                             </Title>
                         </div>
                         <div className='col text-muted'>
@@ -104,21 +90,21 @@ const Container = (props) => {
                                 <Icon
                                     className="fas fa-heart"
                                 />
-                                favorites
+                                Favorites
                             </Title>
                         </div>
                         <div className='col text-muted'>
                             <Title>
                                 {' '}
                                 <Icon className="fas fa-credit-card"/>
-                                payments
+                                Payments
                             </Title>
                         </div>
                         <div className='col text-muted'>
                             <Title>
                                 {' '}
                                 <Icon className="fas fa-map-marker-alt" />
-                                addresses
+                                Addresses
                             </Title>
                         </div>
                     </div>
@@ -131,9 +117,9 @@ const Container = (props) => {
                         </div>
                         <div className='w-100'></div>
                         <div className='col row-cols-1'>
-                            
-                            {data &&
-                                data.map((item) => <OrderCard data={item} />)}
+                            {data.orders &&
+                                data.orders
+                                    .map((item) => <OrderCard data={item} key={item._id}/>)}
                         </div>
                     </div>
                 </div>

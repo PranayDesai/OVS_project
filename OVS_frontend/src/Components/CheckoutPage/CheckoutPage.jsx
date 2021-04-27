@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 `;
 
 const CheckoutPage = (props) => {
-    console.log(props.location.isAddrSelected);
+    
     const [isAddrSelected, setIsAddrSelected] = useState(false);
     const history = useHistory();
     const customerData = JSON.parse(window.localStorage.getItem("customerData"));

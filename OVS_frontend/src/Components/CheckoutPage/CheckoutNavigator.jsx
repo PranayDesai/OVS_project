@@ -79,7 +79,7 @@ function CheckoutNavigator() {
             setName(JSON.parse(localStorage.getItem('customerData')).name);
         }
     }, []);
-    console.log(name);
+    
 
     return (
         <Wrapper className='container-fluid shadow'>
