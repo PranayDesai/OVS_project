@@ -96,7 +96,7 @@ orderSchema.pre(/^find/, function (next) {
     select: 'name phonenumber email',
   }).populate({
     path: 'garage',
-    select: 'name phonenumber email',
+    select: 'name phonenumber email img_url',
   });
   next();
 });

@@ -120,3 +120,53 @@ exports.updateGarage = catchAsync(async (request, response, next) => {
     data: updatedGarage,
   });
 });
+
+exports.addService = catchAsync(async (request, response, next) => {
+  const {
+    garage_id,
+    category,
+    name,
+    price,
+    description = null,
+    img_url = null,
+  } = request.body;
+
+  const findGarageWithService = await Garages.find({
+    $and: [
+      {
+        _id: garage_id,
+      },
+      {
+        'service.name': name,
+      },
+    ],
+  });
+  if (findGarageWithService.length > 0)
+    return next(new AppError('Duplicate service name found!', 404));
+  const updatedGarage = await Garages.findByIdAndUpdate(
+    garage_id,
+    {
+      $addToSet: {
+        service: {
+          category,
+          name,
+          price,
+          description,
+          img_url,
+        },
+      },
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  if (!updatedGarage)
+    return next(new AppError('There is no garage with this id !'), 404);
+  response.status(200).json({
+    status: 'success',
+    message: 'service added succesfully',
+    data: updatedGarage,
+  });
+});

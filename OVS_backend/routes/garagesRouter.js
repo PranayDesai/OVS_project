@@ -14,7 +14,7 @@ garagesRouter
 garagesRouter.route('/').get(garagesControllers.getAllGarages);
 garagesRouter.route('/verifyGarage').post(authControllers.verifyGarage);
 garagesRouter.route('/addGarage').post(authControllers.addGarage);
-
+garagesRouter.route('/addService').post(garagesControllers.addService);
 garagesRouter
   .route('/:id')
   .get(garagesControllers.getGarage)

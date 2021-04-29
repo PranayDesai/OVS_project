@@ -17,19 +17,23 @@ const service = new mongoose.Schema({
       values: ['Four Wheeler', 'Three Wheeler', 'Two Wheeler'],
       message: 'categories is either: Four Wheeler Three Wheeler Two Wheeler',
     },
+    required: [true, 'A service must have a category'],
   },
   name: {
     type: String,
+    required: [true, 'A service must have a name'],
+    unique: [true, 'Duplicate service found with same naem'],
   },
   price: {
     type: Number,
     minlength: [1, 'A price should be greater than zero'],
+    required: [true, 'A service must have a price'],
   },
   description: {
     type: String,
   },
   img_url: {
-    type: Number,
+    type: String,
   },
 });
 
@@ -105,6 +109,7 @@ const garagesSchema = new mongoose.Schema(
     service: {
       type: [service],
       required: false,
+      default: [],
     },
   },
   {

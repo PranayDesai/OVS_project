@@ -12,6 +12,7 @@ process.argv.forEach((argv) => {
       '<password>',
       process.env.DATABASE_PASSWORD
     );
+    console.log(DB);
   } else {
     DB = process.env.DATABASE_LOCAL.replace(
       '<password>',
