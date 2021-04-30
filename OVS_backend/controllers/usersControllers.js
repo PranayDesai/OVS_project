@@ -6,7 +6,12 @@ const axios = require('axios');
 exports.getUser = async (request, response) => {
   try {
     const user = await Users.findById(request.params.id)
-      .populate('orders')
+      .populate({
+        path: 'orders',
+        options: {
+          sort: '-createdAt',
+        },
+      })
       .populate('reviews');
     if (!user)
       return next(new AppError('User with this id does not exist', 404));
