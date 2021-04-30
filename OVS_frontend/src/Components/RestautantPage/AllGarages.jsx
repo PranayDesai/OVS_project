@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SortRestaurants from './SortRestaurants';
+import SortGarages from './SortGarages';
 
 const Wrapper = styled.div`
     font-family: ProximaNova, Arial, Helvetica Neue, sans-serif;
@@ -32,7 +32,7 @@ const Title = styled.div`
     contain: strict;
 `;
 
-const AllRestaurants = () => {
+const AllGarages = () => {
     return (
         <Wrapper>
             <div className='container-fluid' style={{ width: '90%' }}>
@@ -46,7 +46,7 @@ const AllRestaurants = () => {
                                 height: '32px',
                             }}
                         />
-                        All Restaurants
+                        All Garages
                     </Title>
                     <div
                         className='col'
@@ -55,7 +55,7 @@ const AllRestaurants = () => {
                         }}
                     >
                         {' '}
-                        <SortRestaurants filter={'all'} />
+                        <SortGarages filter={'all'} />
                     </div>
                 </div>
             </div>
@@ -63,4 +63,4 @@ const AllRestaurants = () => {
     );
 };
 
-export default AllRestaurants;
+export default AllGarages;

@@ -2,29 +2,31 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import LandingPg from "../Components/LandingPage/LandingPg";
 import Home from "../Components/RestautantPage/Home";
-import ShowMoreRestaurants from "../Components/RestautantPage/ShowMoreRestaurants";
-import MenuPages from "../Components/MenuPage/MenuPages";
+import ShowMoreGarages from "../Components/RestautantPage/ShowMoreGarages";
+import ServiceList from "../Components/MenuPage/ServiceList";
 import CheckoutPage from "../Components/CheckoutPage/CheckoutPage";
 import MyAccountPage from "../Components/MyAccount/MyAccountPage";
 import Confirmation from "../Components/CheckoutPage/Customer/Confirmation";
+import Garage from '../Components/Garage/Garage';
 
 export const Routes = () => {
   return (
     <>
       <Switch>
         <Route path="/" exact render={() => <LandingPg />} />
-        <Route path="/Restaurants" render={() => <Home />} />
-        <Route path="/MenuPage" render={() => <MenuPages />} />
+        <Route path="/GarageList" render={() => <Home />} />
+        <Route path="/ServiceList" render={() => <ServiceList />} />
         <Route
           path="/CheckoutPage"
           render={(props) => <CheckoutPage {...props} />}
         />
         <Route
-          path="/ShowMoreRestaurants"
-          render={(props) => <ShowMoreRestaurants {...props} />}
+          path="/ShowMoreGarages"
+          render={(props) => <ShowMoreGarages {...props} />}
         />
-        <Route path="/my-account" render={() => <MyAccountPage />} />
+        <Route path="/my-account" render={(props) => <MyAccountPage {...props}/>} />
         <Route path="/Confirmation" render={() => <Confirmation />} />
+        <Route path="/Garage" render={() => <Garage />} />
       </Switch>
     </>
   );

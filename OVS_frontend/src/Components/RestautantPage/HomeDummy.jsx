@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Promotions from "./Promotions";
 import styled from "styled-components";
-import HotelCard from "./HotelCard";
+import GarageCard from "./GarageCard";
 import MoreCard from "./MoreCard";
 /* var axios = require("axios"); */
 import axios from 'axios';
@@ -259,7 +259,7 @@ function HomeDummy() {
                 <div className="row row-cols-3" id="topPicks">
                   {
                   topPicks.map((item,index) => (
-                    index<6&&<HotelCard data={item} key={item._id} />
+                    index<6&&<GarageCard data={item} key={item._id} />
                   ))}
                   <MoreCard filter={"top-pick"} more={totalTopPicks - 5} />
                 </div>
@@ -271,7 +271,7 @@ function HomeDummy() {
                   id="Exclusive"
                 >
                   {twoWheelerOnly.map((item,index) => (
-                   index<6&& <HotelCard data={item} key={item._id} />
+                   index<6&& <GarageCard data={item} key={item._id} />
                   ))}
                   <MoreCard filter={"two-wheeler-only"} more={totalTwoWheelerOnly - 5} />
                 </div>
@@ -283,7 +283,7 @@ function HomeDummy() {
                   id="Newly Added"
                 >
                   {newlyAdded.map((item,index) => (
-                    index<6&&<HotelCard data={item} key={item._id} />
+                    index<6&&<GarageCard data={item} key={item._id} />
                   ))}
                   <MoreCard filter={"newly-added"} more={totalNewlyAdded - 5} />
                 </div>
@@ -295,7 +295,7 @@ function HomeDummy() {
                   id="fourWheelerOnly"
                 >
                   {fourWheelerOnly.map((item,index) => (
-                    index<6&&<HotelCard data={item} key={item._id} />
+                    index<6&&<GarageCard data={item} key={item._id} />
                   ))}
                   <MoreCard filter={"four-wheeler-only"} more={totalFourWheelerOnly - 5} />
                 </div>

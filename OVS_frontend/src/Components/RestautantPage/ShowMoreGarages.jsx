@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import SortRestaurants from './SortRestaurants';
+import SortGarages from './SortGarages';
 import Navigator from './Navigator';
 
 const Wrapper = styled.div`
@@ -40,7 +40,7 @@ const Title = styled.div`
     contain: strict;
 `;
 
-const ShowMoreRestaurants = (props) => {
+const ShowMoreGarages = (props) => {
     const [filter, setFilter] = useState('');
     console.log(props);
     // const { filter } = props.location.filter;
@@ -71,8 +71,7 @@ const ShowMoreRestaurants = (props) => {
                                     </div>
                                     <div class='w-100'></div>
                                     <h4 className='col text-left'>
-                                        List of most popular brands in your
-                                        neighborhood
+                                        Best Garges near you
                                     </h4>
                                 </div>
                             </Title>
@@ -118,7 +117,7 @@ const ShowMoreRestaurants = (props) => {
                             }}
                         >
                             {' '}
-                            <SortRestaurants filter={props.location.filter} />
+                            <SortGarages filter={props.location.filter} />
                         </div>
                     </div>
                 </div>
@@ -127,4 +126,4 @@ const ShowMoreRestaurants = (props) => {
     );
 };
 
-export default ShowMoreRestaurants;
+export default ShowMoreGarages;

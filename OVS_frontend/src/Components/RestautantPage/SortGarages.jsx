@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import HotelCard from './HotelCard';
+import GarageCard from './GarageCard';
 var axios = require('axios');
 
 const Wrapper = styled.div`
@@ -48,7 +48,7 @@ const Equal = styled.img`
     box-shadow: 0 1px 4px 0 rgba(40, 44, 63, 0.4);
 `;
 
-const SortRestaurants = (props) => {
+const SortGarages = (props) => {
     console.log('props', props.filter, typeof props.filter);
     // const { filter } = props.filter;
     const history = useHistory();
@@ -134,13 +134,13 @@ const SortRestaurants = (props) => {
                                     className='btn btn-sm'
                                     onClick={allData}
                                 >
-                                    <i class="fas fa-equals"></i>
+                                   {/*  <i class="fas fa-equals"></i> */}
                                 </button>
                                 {totalRestaurants} Garages
                             </h3>
                         </div>
 
-                        <ul className='list-inline'>
+                       {/*  <ul className='list-inline'>
                             <button
                                 className='list-inline-item btn'
                                 onClick={() => filterData('two-wheeler-only')}
@@ -173,7 +173,7 @@ const SortRestaurants = (props) => {
                                     }}
                                 />
                             </button>
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@ const SortRestaurants = (props) => {
                 }}
             >
                 {data.map((item) => (
-                    <HotelCard data={item} key={item._id} />
+                    <GarageCard data={item} key={item._id} />
                 ))}
             </div>
         </Wrapper>
@@ -194,6 +194,6 @@ const SortRestaurants = (props) => {
 
 
 
-export default SortRestaurants;
+export default SortGarages;
 
 

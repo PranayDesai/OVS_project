@@ -1,7 +1,7 @@
 import React from "react";
 import Navigator from "./Navigator";
 import HomeDummy from "./HomeDummy";
-import AllRestaurants from "./AllRestaurants";
+import AllGarages from "./AllGarages";
 import MainFooter from "../LandingPage/MainFooter";
 
 function Home() {
@@ -9,8 +9,6 @@ function Home() {
     <div>
       <Navigator />
       <HomeDummy />
-      {/* <AllRestaurants /> */}
-      {/* <MainFooter /> */}
     </div>
   );
 }

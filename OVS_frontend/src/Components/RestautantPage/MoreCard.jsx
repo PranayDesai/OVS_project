@@ -31,7 +31,7 @@ const MoreCard = (props) => {
         console.log(more);
         console.log(filter);
         history.push({
-            pathname: '/ShowMoreRestaurants',
+            pathname: '/ShowMoreGarages',
             filter: filter,
         });
     };

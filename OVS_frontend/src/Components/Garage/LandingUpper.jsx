@@ -83,7 +83,7 @@ class LandingUpper extends Component {
   };
 
   goTo = () => {
-    this.props.history.push("/GarageList");
+    this.props.history.push("/Restaurants");
   };
 
 
@@ -205,65 +205,6 @@ class LandingUpper extends Component {
                 </Search>
               </div>
 
-              {/* POPULAR CITIES */}
-              {/* <City className='container'>
-                                <div className='row row-cols-1'>
-                                    <div className='col text-left text-wrap mb-1 text-uppercase h6 text-muted '>
-                                        Popular cities in India
-                                    </div>
-                                    <div
-                                        className='container'
-                                        style={{
-                                            marginLeft: '0px',
-                                        }}
-                                    >
-                                        <ul
-                                            className='list-inline'
-                                            style={{
-                                                marginLeft: '0px',
-                                                textAlign: 'left',
-                                            }}
-                                        >
-                                            <li
-                                                className='list-inline-item font-weight-bold'
-                                                style={{
-                                                    marginLeft: '0px',
-                                                }}
-                                            >
-                                                Ahmedabad
-                                            </li>
-                                            <li className='list-inline-item font-weight-bold text-muted'>
-                                                Bangalore
-                                            </li>
-                                            <li className='list-inline-item font-weight-bold'>
-                                                Chennai
-                                            </li>
-                                            <li className='list-inline-item font-weight-bold text-muted'>
-                                                Delhi
-                                            </li>
-                                            <li className='list-inline-item font-weight-bold'>
-                                                Gurgaon
-                                            </li>
-                                            <li className='list-inline-item font-weight-bold text-muted'>
-                                                Hyderabad
-                                            </li>
-                                            <li className='list-inline-item font-weight-bold'>
-                                                Kolkata
-                                            </li>
-                                            <li className='list-inline-item font-weight-bold text-muted'>
-                                                Mumbai
-                                            </li>
-                                            <br />
-                                            <li className='list-inline-item font-weight-bold'>
-                                                Pune
-                                            </li>
-                                            <li className='list-inline-item font-weight-bold text-muted'>
-                                                &more
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </City> */}
             </div>
             {/* MAIN IMAGE */}
             <div className="col-5">

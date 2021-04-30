@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navigator from '../RestautantPage/Navigator';
 import styled from 'styled-components';
-import RestaurantCards from './RestaurantCards';
+import ServicesCards from './ServicesCards';
 import Options from './Options';
 import Cart from './Cart';
 
@@ -71,7 +71,7 @@ const Wrapper = styled.div`
     }
 `;
 
-function Menupages() {
+function ServiceList() {
     const data = JSON.parse(localStorage.getItem('hotel')); 
      const userdata =JSON.parse(localStorage.getItem('customerData')).geometry;
     console.log(data);
@@ -79,21 +79,6 @@ function Menupages() {
         <div>
             <Navigator />
             <Wrapper>
-                {/* <div className='container-fluid thin'>
-                    <div className='row'>
-                        <div className='col-12 my-1 text-left'>
-                            <small
-                                className='text-muted'
-                                style={{
-                                    marginLeft: '15%',
-                                    position: 'sticky',
-                                }}
-                            >
-                                Home /  {userdata.area} /  {userdata.place_name}  / {data.name}
-                            </small>
-                        </div>
-                    </div>
-                </div> */}
                 <div className='container-fluid middlePart'>
                     <div className='row'>
                         <div className='col-4'>
@@ -102,7 +87,7 @@ function Menupages() {
                         <div className='col-4 text-left'>
                             <h1>{data.name}</h1>
                             <div>{data.categories.join(', ')}</div>
-                            <div className='my-2'>Koramangala,Bangalore</div>
+                            <div className='my-2'>{userdata.area}{" , "}{userdata.place_name}</div>
                             <div className='row mt-3'>
                                 <div
                                     className='col-3'
@@ -112,32 +97,22 @@ function Menupages() {
                                 >
                                     <p>
                                         <i className='fas fa-star mr-1'></i>
-                                        {/* {data.rating} */}
-                                        4.5
+                                        {data.ratingsAverage}
+                                        
                                     </p>
-                                    <small>1000+ Ratings</small>
+                                    <small>1000+ Ratings {/* {data.ratingsQuantity} */}</small>
                                 </div>
                                 <div
-                                    className='col-3'
-                                    style={{
-                                        borderRight: '1px solid #babbbf',
-                                    }}
-                                >
-                                    <p>{/* {data.average_time} */}30 mins</p>
-                                    <small>Delivery Time</small>
-                                </div>
-                                <div
-                                    className='col-3'
+                                    className='col-4'
                                     style={{
                                         borderRight: '1px solid #babbbf',
                                     }}
                                 >
                                     <p>
-                                        <i className='fas fa-rupee-sign mr-1'></i>
-                                       {/*  {data.average_cost} */}
-                                       500
+                                        <i class="fas fa-phone mr-1"></i>
+                                        {data.phonenumber}
                                     </p>
-                                    <small>Cost for Two</small>
+                                    <small>Phone number</small>
                                 </div>
                             </div>
                         </div>
@@ -163,8 +138,8 @@ function Menupages() {
                                                     color: '#ffffff',
                                                 }}
                                             >
-                                                50% off up to ₹100 on select
-                                                items | Use code SPECIALS
+                                                50% off on your first service
+                                                | Use code FirstService50
                                             </p>
                                         </div>
                                         <div className='col-lg-12'>
@@ -178,8 +153,8 @@ function Menupages() {
                                                     color: '#ffffff',
                                                 }}
                                             >
-                                                40% off up to ₹80 + ₹30 PhonePe
-                                                cashback | Use code SWIGGYIT
+                                                40% off on your first repair
+                                                | Use code FirstRepair40
                                             </p>
                                         </div>
                                     </div>
@@ -219,18 +194,12 @@ function Menupages() {
                                 >
                                     {elem}
                                 </h2>
-                                <small
-                                    className='text-left'
-                                    style={{ marginLeft: '-79.5%' }}
-                                >
-                                    23 ITEMS
-                                </small>
 
-                                {data.items
+                                {data.service
                                     .filter((item) => item.category === elem)
                                     .map((item) => (
                                         <div className='col pt-1 text-left'>
-                                            <RestaurantCards data={item} />
+                                            <ServicesCards data={item} />
                                         </div>
                                     ))}
                             </React.Fragment>
@@ -245,4 +214,4 @@ function Menupages() {
     );
 }
 
-export default Menupages;
+export default ServiceList;

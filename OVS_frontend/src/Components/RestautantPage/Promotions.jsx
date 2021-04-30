@@ -3,6 +3,12 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import c1 from '../../Pics and logo/GarageList/c1.jpg';
+import c2 from '../../Pics and logo/GarageList/c2.png';
+import c3 from '../../Pics and logo/GarageList/c4.png';
+import c4 from '../../Pics and logo/GarageList/c6.png';
+import c5 from '../../Pics and logo/GarageList/c7.png';
+import c6 from '../../Pics and logo/GarageList/c8.png';
 
 const Img = styled.img`
   cursor: pointer;
@@ -43,76 +49,41 @@ function Promotions() {
           <Slider {...settings}>
             <div className="col">
               <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/jkcbdbr3qdjuzgjepkjx"
+              src={c1}
                 alt="promotion img"
               />
             </div>
             <div className="col">
               <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/xax7qfs6dbmzdmzxq1dh"
+              src={c2}
                 alt="promotion img"
               />
             </div>
             <div className="col">
               <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/c59djn2nskqlf0ork6wc"
+              src={c3}
                 alt="promotion img"
               />
             </div>
             <div className="col">
               <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/qd0mwkv1mk3bxyy3x5fm"
+              src={c4}
                 alt="promotion img"
               />
             </div>
             <div className="col">
               <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/rl8zesrkte88twzgbma5"
+              src={c5}
                 alt="promotion img"
               />
             </div>
             <div className="col">
               <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/lgxbfmjfi9ba7sqbliek"
+              src={c6}
                 alt="promotion img"
               />
             </div>
-            <div className="col">
-              <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/ztpd5q9awnmmnefczn5x"
-                alt="promotion img"
-              />
-            </div>
-            <div className="col">
-              <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/jcjcvebiczqe5jr2vijo"
-                alt="promotion img"
-              />
-            </div>
-            <div className="col">
-              <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rs4krvosxjt6i5wyefvy"
-                alt="promotion img"
-              />
-            </div>
-            <div className="col">
-              <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/kmewp8efed0ev7yvfyx6"
-                alt="promotion img"
-              />
-            </div>
-            <div className="col">
-              <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/marketing-dashboard/carousel/e8qsywpath9uli7tnikc"
-                alt="promotion img"
-              />
-            </div>
-            <div className="col">
-              <Img
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/marketing-dashboard/carousel/bmp2yqaaqouptllxmkei"
-                alt="promotion img"
-              />
-            </div>
+            
           </Slider>
         </div>
       </div>
