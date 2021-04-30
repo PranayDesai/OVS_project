@@ -73,7 +73,7 @@ const Wrapper = styled.div`
   }
 `;
 
-function RestaurantCards(props) {
+function ServicesCards(props) {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { cart } = state;
@@ -111,7 +111,7 @@ function RestaurantCards(props) {
                 {data.price}
               </small>
               <br />
-              <small className="mb-5">{data.description}</small>
+              {/* <small className="mb-5">{data.description}</small> */}
             </div>
           </div>
           <div className="col-lg-5 mt-4 mb-5 position-relative">
@@ -146,4 +146,4 @@ function RestaurantCards(props) {
   );
 }
 
-export default RestaurantCards;
+export default ServicesCards;

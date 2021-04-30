@@ -31,8 +31,7 @@ function EmptyCart() {
               className="w-100"
             />
             <p className="mt-4 text-left">
-              Good food is always cooking! Go ahead, order some yummy items from
-              the menu.
+              Extra Charges may apply according to work needed on your vehical and parts replacement.
             </p>
           </div>
         </div>

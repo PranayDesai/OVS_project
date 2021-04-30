@@ -109,7 +109,7 @@ function Navigator() {
                         <ul className='list-inline'>
                             <li className='list-inline-item'>
                                 <Link
-                                    to='/Restaurants'
+                                    to='/GarageList'
                                     type='button'
                                     className='btn btn-lg'
                                 >
@@ -127,12 +127,12 @@ function Navigator() {
                                 {placeName}
                             </Address>
                             <li className='list-inline-item'>
-                                <button type='button' className='btn btn-sm'>
+                                {/* <button type='button' className='btn btn-sm'>
                                     <i
                                         className='fas fa-chevron-down'
                                         style={{ color: '#002D62' }}
                                     ></i>
-                                </button>
+                                </button> */}
                             </li>
                         </ul>
                     </div>

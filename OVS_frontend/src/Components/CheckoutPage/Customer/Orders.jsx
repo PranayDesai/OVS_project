@@ -116,7 +116,7 @@ const CouponWrapper = styled.div`
   }
 `;
 
-const Info = styled.img`
+const Info = styled.i`
   width: 17px;
   height: 17px;
   margin-top: -3px;
@@ -214,7 +214,8 @@ const Orders = () => {
           <div className="col row justify-content-between pr-0 mb-1">
             <div className="col text-muted">
               Item Total
-              <Info src="/Icons/information.svg" alt="info" />
+              
+              <Info className="fas fa-info-circle" alt="info" />
             </div>
             <div className="col-4 text-right pr-0 text-muted">
               ₹{state.cart.reduce((a, b) => a + b.qty * b.price, 0)}
@@ -223,8 +224,8 @@ const Orders = () => {
           <div class="w-100"></div>
           <div className="col row justify-content-between pr-0 mb-3">
             <div className="col text-muted">
-              Delivery partner fee
-              <Info src="/Icons/information.svg" alt="info" />
+              Visiting Charges
+              <Info className="fas fa-info-circle" alt="info" />
             </div>
             <div className="col-4 text-right pr-0 text-muted">₹ 50</div>
             <div class="w-100"></div>

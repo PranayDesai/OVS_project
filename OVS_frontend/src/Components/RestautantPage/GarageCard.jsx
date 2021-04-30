@@ -55,14 +55,14 @@ const Discount = styled.p`
     margin-top: 15px;
 `;
 
-const HotelCard = (props) => {
+const GarageCard = (props) => {
     const history = useHistory();
 
     const { data } = props;
 
     const goTo = () => {
         localStorage.setItem('hotel', JSON.stringify(data));
-        history.push('/MenuPage');
+        history.push('/ServiceList');
     };
     // console.log(data);
     return (
@@ -95,16 +95,8 @@ const HotelCard = (props) => {
                                 <i className='fas fa-star mr-1'></i>
                                 {data.ratingsAverage}
                             </Badge>
-                            {/* <span>&bull;</span> */}
                             <span>Contact Number : {data.mobile}</span>
-                            {/* <span>&bull;</span> */}
-                            {/* <span
-                                style={{
-                                    marginRight: '0px',
-                                }}
-                            >
-                                ₹{data.average_cost} FOR TWO
-                            </span> */}
+                            
                             <div className='dropdown-divider'></div>
                             <Discount className='font-weight-normal'>
                                
@@ -125,4 +117,4 @@ const HotelCard = (props) => {
     );
 };
 
-export default HotelCard;
+export default GarageCard;

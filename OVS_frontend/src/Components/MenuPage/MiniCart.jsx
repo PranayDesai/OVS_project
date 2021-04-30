@@ -40,12 +40,12 @@ function MiniCart() {
                 className="btn btn-block btn-lg"
                 style={{
                   borderRadius: "0px",
-                  background: "#fc8019",
+                  background: "green",
                   color: "white",
                 }}
                 onClick={handleCheckout}
               >
-                <h6 className="mt-2" style={{ background: "#fc8019" }}>
+                <h6 className="mt-2" style={{ background: "green" }}>
                   CHECKOUT
                 </h6>
               </button>

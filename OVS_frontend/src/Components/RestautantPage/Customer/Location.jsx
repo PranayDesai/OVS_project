@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const City = styled.button`
     background: #fff;
@@ -20,7 +21,12 @@ const City = styled.button`
         cursor: pointer;
         color: #002D62;
         border-bottom: 2px solid #002D62;
+    };
+    .link{
+        text-decoration:none;
+        color:#002D62;
     }
+    
 `;
 
 const useStyles = makeStyles({
@@ -80,7 +86,9 @@ export default function TemporaryDrawer() {
                 // onClick={toggleDrawer('left', true)}
                 onClick={toggleDrawer('left', false)}
             >
+                <Link className="link"exact to="/">
                 {area}
+                </Link>
             </City>
             <Drawer
                 anchor={'left'}
