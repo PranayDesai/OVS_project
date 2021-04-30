@@ -160,3 +160,39 @@ exports.addGarage = catchAsync(async (request, response, next) => {
     return next(new AppError('Invalid OTP!', 404));
   }
 });
+
+exports.garageLoginVerify = catchAsync(async (request, response, next) => {
+  const { phonenumber } = request.body;
+  const { error } = loginValidation({ phonenumber });
+  if (error)
+    return next(new AppError('Phone Number Validation error ' + error, 404));
+  const garage = await Garages.find({
+    phonenumber: phonenumber,
+  });
+  if (garage.length <= 0)
+    return next(new AppError('Garage does not exist! Need to Sign Up', 404));
+  response.status(200).json({
+    status: 'success',
+    message: 'OTP send successfully',
+  });
+});
+
+exports.garageLogin = catchAsync(async (request, response, next) => {
+  if (GarageOTP === request.body.otp) {
+    const { phonenumber } = request.body;
+    const { error } = loginValidation({ phonenumber });
+    if (error)
+      return next(new AppError('Phone Number Validation error ' + error, 404));
+    const garage = await Garages.find({
+      phonenumber: phonenumber,
+    }).populate('orders');
+    if (garage.length <= 0)
+      return next(new AppError('Garage does not exist! Need to Register', 404));
+    response.status(200).json({
+      status: 'success',
+      data: garage[0],
+    });
+  } else {
+    return next(new AppError('Invalid OTP!', 404));
+  }
+});
