@@ -75,3 +75,60 @@ exports.getUserAddress = catchAsync(async (request, response, next) => {
     });
   }
 });
+
+exports.addUserAddress = catchAsync(async (request, response, next) => {
+  let { user_id, flat_no, landmark, lat, long, place_name } = request.body;
+  if (user_id && flat_no && landmark && lat && long && place_name) {
+    if (!(isNaN(lat) || isNaN(long))) {
+      lat = parseFloat(parseFloat(lat).toFixed(6));
+      long = parseFloat(parseFloat(long).toFixed(6));
+      const userUpdatedAddress = await Users.findByIdAndUpdate(
+        user_id,
+        {
+          $addToSet: {
+            addressList: {
+              flat_no,
+              landmark,
+              lat,
+              long,
+              place_name,
+            },
+          },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      if (!userUpdatedAddress)
+        return next(new AppError('User with this id does not exist', 404));
+
+      response.status(200).json({
+        status: 'success',
+        message: 'new user address added',
+        data: userUpdatedAddress,
+      });
+    } else {
+      return next(new AppError('Illegal coordinates !!', 404));
+    }
+  } else {
+    return next(new AppError('Missing some fields or data !', 404));
+  }
+});
+
+exports.deleteUserAddress = catchAsync(async (request, response, next) => {
+  const { user_id, address_id } = request.body;
+  if (user_id && address_id) {
+    const userDeletedAddress = Users.findByIdAndUpdate(user_id, {
+      $pull: { addressList: { _id: address_id } },
+    });
+    if (!userDeletedAddress)
+      return next(new AppError('User with this id does not exist', 404));
+    response.status(200).json({
+      status: 'success',
+      message: 'Address deleted',
+    });
+  } else {
+    return next(new AppError('Missing field and data', 404));
+  }
+});

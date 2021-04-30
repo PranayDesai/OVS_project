@@ -13,6 +13,10 @@ usersRouter
 usersRouter.route('/loginVerify').post(authControllers.loginVerify);
 usersRouter.route('/login').post(authControllers.login);
 usersRouter
+  .route('/userAddress')
+  .patch(usersControllers.addUserAddress)
+  .delete(usersControllers.deleteUserAddress);
+usersRouter
   .route('/:id')
   .get(usersControllers.getUser)
   .patch(usersControllers.updateUser);
