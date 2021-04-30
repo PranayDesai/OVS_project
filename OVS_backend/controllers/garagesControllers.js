@@ -16,7 +16,7 @@ exports.getAllGarages = catchAsync(async (request, response, next) => {
 });
 
 exports.getGarage = catchAsync(async (request, response, next) => {
-  const garage = await Garages.findById(request.params.id);
+  const garage = await Garages.findById(request.params.id).populate('orders');
   if (!garage)
     return next(new AppError('Garage with this id does not exist', 404));
   response.status(200).json({
