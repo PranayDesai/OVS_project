@@ -84,7 +84,7 @@ exports.getUserAddress = catchAsync(async (request, response, next) => {
 exports.addUserAddress = catchAsync(async (request, response, next) => {
   let { user_id, flat_no, landmark, lat, long, place_name } = request.body;
   if (user_id && flat_no && landmark && lat && long && place_name) {
-    if (!(isNaN(lat) || isNaN(long))) {
+    if (!(!lat || !long || isNaN(lat) || isNaN(long))) {
       lat = parseFloat(parseFloat(lat).toFixed(6));
       long = parseFloat(parseFloat(long).toFixed(6));
       const userUpdatedAddress = await Users.findByIdAndUpdate(

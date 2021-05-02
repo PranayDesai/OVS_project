@@ -102,9 +102,18 @@ const garagesSchema = new mongoose.Schema(
       },
       coordinates: {
         type: [Number],
-        default: [72.611528, 22.998554],
+        required: [true, 'A garage must have lat and long'],
+      },
+      area: {
+        type: String,
+      },
+      place_name: {
+        type: String,
       },
       required: false,
+    },
+    address: {
+      type: String,
     },
     service: {
       type: [service],

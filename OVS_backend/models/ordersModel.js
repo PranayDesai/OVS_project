@@ -65,9 +65,9 @@ const orderSchema = new mongoose.Schema(
     orderStatus: {
       type: String,
       enum: {
-        values: ['pending', 'processing', 'rejected', 'completed'],
+        values: ['pending', 'processing', 'rejected', 'completed', 'reviewed'],
         message:
-          'A order status must belong to these field  pending , processing , rejected , completed .',
+          'A order status must belong to these field  pending , processing , rejected , completed, reviewed .',
       },
       required: true,
     },
@@ -81,6 +81,16 @@ const orderSchema = new mongoose.Schema(
     userAddress: {
       type: address,
       required: [true, 'A order must contain user address'],
+    },
+    review: {
+      rating: {
+        type: Number,
+      },
+      reviewMessage: {
+        type: String,
+        default: '',
+      },
+      required: false,
     },
   },
   {

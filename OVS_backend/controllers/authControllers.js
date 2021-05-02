@@ -104,7 +104,8 @@ exports.loginVerify = catchAsync(async (request, response, next) => {
 });
 
 exports.verifyGarage = catchAsync(async (request, response, next) => {
-  let { name, password, email, phonenumber } = request.body;
+  let { name, password, email, phonenumber, location, address } = request.body;
+
   const { error } = registerationValidation({
     name,
     password,
@@ -112,6 +113,20 @@ exports.verifyGarage = catchAsync(async (request, response, next) => {
     phonenumber,
   });
   if (error) return next(new AppError(`Validation error: ${error}`, 400));
+
+  if (!location)
+    return next(new AppError('A garage must have its location', 404));
+  let { lat, long, area, place_name } = location;
+
+  if (!(!lat || !long || isNaN(lat) || isNaN(long))) {
+    lat = parseFloat(parseFloat(lat).toFixed(6));
+    long = parseFloat(parseFloat(long).toFixed(6));
+  } else {
+    return next(new AppError('Illegal coordinates !!', 404));
+  }
+
+  if (!address) return next(new AppError('A garage must have an address', 404));
+
   phonenumber = parseInt(phonenumber);
   email = email.toLowerCase();
 
@@ -128,7 +143,14 @@ exports.verifyGarage = catchAsync(async (request, response, next) => {
 
 exports.addGarage = catchAsync(async (request, response, next) => {
   if (GarageOTP === request.body.otp) {
-    let { name, password, email, phonenumber } = request.body;
+    let {
+      name,
+      password,
+      email,
+      phonenumber,
+      location,
+      address,
+    } = request.body;
     const { error } = registerationValidation({
       name,
       password,
@@ -136,6 +158,21 @@ exports.addGarage = catchAsync(async (request, response, next) => {
       phonenumber,
     });
     if (error) return next(new AppError(`Validation error: ${error}`, 400));
+
+    if (!location)
+      return next(new AppError('A garage must have its location', 404));
+    let { lat, long, area, place_name } = location;
+
+    if (!(!lat || !long || isNaN(lat) || isNaN(long))) {
+      lat = parseFloat(parseFloat(lat).toFixed(6));
+      long = parseFloat(parseFloat(long).toFixed(6));
+    } else {
+      return next(new AppError('Illegal coordinates !!', 404));
+    }
+
+    if (!address)
+      return next(new AppError('A garage must have an address', 404));
+
     phonenumber = parseInt(phonenumber);
     email = email.toLowerCase();
 
@@ -150,6 +187,12 @@ exports.addGarage = catchAsync(async (request, response, next) => {
       password,
       email,
       phonenumber,
+      geometry: {
+        coordinates: [long, lat],
+        area,
+        place_name,
+      },
+      address,
     });
     response.status(200).json({
       status: 'success',
