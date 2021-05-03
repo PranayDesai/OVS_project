@@ -14,19 +14,8 @@ export const Routes = () => {
     <>
       <Switch>
         <Route path="/" exact render={() => <LandingPg />} />
-        <Route path="/GarageList" render={() => <Home />} />
-        <Route path="/ServiceList" render={() => <ServiceList />} />
-        <Route
-          path="/CheckoutPage"
-          render={(props) => <CheckoutPage {...props} />}
-        />
-        <Route
-          path="/ShowMoreGarages"
-          render={(props) => <ShowMoreGarages {...props} />}
-        />
         <Route path="/my-account" render={(props) => <MyAccountPage {...props}/>} />
-        <Route path="/Confirmation" render={() => <Confirmation />} />
-        <Route path="/Garage" render={() => <Garage />} />
+        
       </Switch>
     </>
   );

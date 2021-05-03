@@ -39,12 +39,13 @@ font-size:2rem;
 
 const Container = () => {
     const [data, setData] = useState({});
-    const [newdata,setNewdata] =useState();
+    
+
     useEffect(() => {
-        const id = JSON.parse(localStorage.getItem('customerData'))._id;
+        const id = JSON.parse(localStorage.getItem('garageData'))._id;
         var config = {
             method: 'get',
-            url: `http://localhost:9000/api/v1/users/${id}`,
+            url: `http://localhost:9000/api/v1/garages/${id}`,
             headers: {},
         };
 
@@ -56,11 +57,6 @@ const Container = () => {
                 /* console.log(error.response.data); */
             });
     }, []);
-
-    const handleChange=(data)=>{
-        console.log(data);
-        setNewdata(data);
-    }
   /*   console.log(data); */
     return (
         <Wrapper>
@@ -124,7 +120,7 @@ const Container = () => {
                         <div className='col row-cols-1'>
                             {data.orders &&
                                 data.orders
-                                    .map((item) => <OrderCard data={item} key={item._id} handleChange={(data)=>handleChange(data)}/>)}
+                                    .map((item) => <OrderCard data={item} key={item._id} />)}
                         </div>
                     </div>
                 </div>

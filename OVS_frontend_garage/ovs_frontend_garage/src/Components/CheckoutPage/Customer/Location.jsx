@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Map from './Map';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 const Wrapper = styled.div`
     overflow: hidden;
@@ -145,7 +144,6 @@ export default function TemporaryDrawer() {
     const getUserLocation = () => {
         console.log(getUserLocation);
         const data = JSON.parse(localStorage.getItem('CustomerCurrentLoc'));
-        
 
         const userLoc = {
             flat_no: flatNo,
@@ -156,20 +154,8 @@ export default function TemporaryDrawer() {
             type: type,
         };
 
-
-
         localStorage.setItem('CustomerCurrentLoc', JSON.stringify(userLoc));
 
-        axios.patch("http://localhost:9000/api/v1/users/userAddress",{
-            "user_id": JSON.parse(window.localStorage.getItem("customerData"))._id,
-            "flat_no": flatNo,
-            "landmark":landmark,
-            "lat": data.lat,
-            "long": data.long,
-            "place_name": data.place_name
-        }).then((res)=>{
-            console.log(res);
-        })
         setState({ ...state, left: false });
         history.push('/CheckoutPage');
     };

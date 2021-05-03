@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import BillItems from '../CheckoutPage/Customer/BillItems';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Rating from '@material-ui/lab/Rating';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+
 const Wrapper = styled.div`
     font-family: ProximaNova, Arial, Helvetica Neue, sans-serif;
     letter-spacing: 0;
@@ -83,23 +77,10 @@ const Help = styled.button`
 
 const OrderCard = (props) => {
     const { data } = props;
-    const [handleCancel,sethandleCancel] = useState();
-    const [rating,setRating] = useState("");
-    const [message,setMessage] = useState("");
-    const [toggle,setToggle] = useState(false);
-    const [value, setValue] = React.useState(2);
-    
-     useEffect(()=>{
-            if(handleCancel == "reviewed"){
-                sethandleCancel("reviewed");
-            }else{
-            sethandleCancel(data.orderStatus);
-            console.log("inside useEffect")
-            }
-     });
-
-
-
+    console.log('orders', data);
+    const [handleCancel,sethandleCancel] = useState("pending");
+    /* const [handleAcceptOrder,sethandleAcceptOrder] = useState("pending");
+    const [handlePaymentDone,sethandlePaymentDone] = useState("processing");  */      
     const handleCancelOrder=(id)=>{
         axios.patch(`http://localhost:9000/api/v1/orders/${id}`,{
             "orderStatus": "rejected"
@@ -108,38 +89,23 @@ const OrderCard = (props) => {
             
         })
     }
-
-    const handleSubmit=(id)=>{
+    const handleAcceptOrder=(id)=>{
         axios.patch(`http://localhost:9000/api/v1/orders/${id}`,{
-            "orderStatus": "reviewed",
-            "review":{
-                "rating":value,
-                "reviewMessage":message
-                }
+            "orderStatus": "processing"
         }).then((res)=>{
-            console.log("inside patch",res);
             sethandleCancel(res.data.data.orderStatus);
             
         })
 
-        axios.post("http://localhost:9000/api/v1/reviews",
-        {
-            "review": message,
-            "rating": value,
-            "user_id": data.user._id,
-            "garage_id": data.garage._id
-        }
-        ).then((res)=>{
-            
+    }
+    const handlePaymentDone=(id)=>{
+        axios.patch(`http://localhost:9000/api/v1/orders/${id}`,{
+            "orderStatus": "completed"
+        }).then((res)=>{
+            sethandleCancel(res.data.data.orderStatus);
         })
 
-        
-        
     }
-    
-      
-    const date = new Date(data.createdAt).toLocaleString();
-    
     const showGarageStatus =(handleCancel)=>{
         if(handleCancel == "pending"){
             return (<i class="fas fa-clock" style={{color:"orange",marginLeft:"10px"}}></i>)
@@ -157,209 +123,82 @@ const OrderCard = (props) => {
             return(<i class="fas fa-check-double" style={{color:"green",marginLeft:"10px"}}></i>)
         }
     }
-    const showButtons=(handleCancel)=>{
+    const buttons=(handleCancel)=>{
         if(handleCancel == "pending"){
-            return (<Help
+            return (
+            <div className="col">
+            <Help
+                type='button'
+                className='btn col-2 p-2 mr-4 text-uppercase'
+                onClick={()=>handleAcceptOrder(data._id)}
+                style={{color:"white",backgroundColor:"green",border:"1px solid green"}}
+            >
+                Accept order
+            </Help>
+            
+            
+            <Help
                 type='button'
                 className='btn col-2 p-2 mr-4 text-uppercase'
                 onClick={()=>handleCancelOrder(data._id)}
                 style={{color:"white",backgroundColor:"red",border:"1px solid red"}}
             >
                 Cancel order
-            </Help>)
+            </Help>
+            </div>
+            )
         }
         else if(handleCancel == "processing"){
-            {console.log("Inside processing")}
             return (
-                
-            <p>Someone will reach you soon</p>)
+            <div className="col">
+                <Help
+                type='button'
+                className='btn col-2 p-2 mr-4 text-uppercase'
+                onClick={()=>handleCancelOrder(data._id)}
+                style={{color:"white",backgroundColor:"red",border:"1px solid red"}}
+            >
+                Cancel order
+            </Help>
+            <Help
+                type='button'
+                className='btn col-2 p-2 mr-4 text-uppercase'
+                onClick={()=>handlePaymentDone(data._id)}
+                style={{color:"white",backgroundColor:"green",border:"1px solid green"}}
+            >
+                Payment Done
+            </Help>
+            </div>)
         }
         else if(handleCancel == "rejected"){
-            return (<p>Your order has been canceled</p>)
+            return (<p>You have canceled this order</p>)
         }
         else if(handleCancel == "completed"){
             return(
-                <Box className="row" component="fieldset" mb={3} borderColor="transparent">
-                    <Typography className="col" component="legend">Rate your Experiance with us :</Typography>
-                        <Rating
-                        className="col-lg-12"
-                        name="simple-controlled"
-                        value={value}
-                        onChange={(event, newValue) => {
-                            setValue(newValue);
-                        }}
-                        size="large"
-                        />
-                        <TextField className="col-lg-12" onChange={(e)=>{
-                                setMessage(e.target.value)
-                        }} 
-                        id="standard-basic" 
-                        label="Message" 
-                        style={{marginLeft:"20px"}}
-                        />
-                     
-                        <Button className="col-lg-3" variant="contained" onClick={()=>handleSubmit(data._id)} style={{marginLeft:"20px",marginTop:"10px",color:"white",backgroundColor:"green"}}>
-                            Done
-                        </Button>
-                     
-                </Box>
+                <p>Customer hasn't reviewed yet</p>
             )
         }
         else if(handleCancel == "reviewed"){
-            if(data.review.rating){
-                return(
-                    <>
-                <p className="col-lg-12">Your rating for Service</p>
-                <p className="col">{data.review.rating}  <i class="fas fa-star" style={{color:"	#FFD700"}}></i>| <span>{data.review.reviewMessage}</span></p>
-                </>
-                )
-            }else{
             return(
-                <>
-                <p className="col-lg-12">Your rating for Service</p>
-                <p className="col">{value}  <i class="fas fa-star" style={{color:"	#FFD700"}}></i>| <span>{message}</span></p>
-                </>
-            )}
+                <p>Customer rated you | {data.review.rating} <i class="fas fa-star" style={{color:"	#FFD700"}}></i></p>
+            )
         }
+
     }
     const showCard=()=>{
-        if(handleCancel == "reviewed"){
-           return( 
-            <Wrapper className='container text-left mb-5'>
-            <div className='row p-4'>
-                <div className='col-3 pl-0'>
-                    <Image src={data.garage.img_url} alt='Hotel' />
-                </div>
-                <div className='col row-cols-1 pl-0'>
-                    <div className='col'>
-                        <div className='row justify-content-between'>
-                            <div className='col-md-auto'>
-                                <Name>{data.garage.name}</Name>
-                            </div>
-                            <div className='col-md-auto text-right mt-1 text-muted'>
-                                {handleCancel}
-                                {showGarageStatus(handleCancel)}  
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col text-capitalize text-muted'>
-                        <Info>
-                            ORDER #{data._id} | {date.toString()}
-                        </Info>
-                    </div>
-                    <div className='col text-uppercase mt-3'>
-                        <Dets>view details</Dets>
-                    </div>
-                </div>
-            </div>
-            <div className='row-cols-1'>
-                <div
-                    className='col mt-3 mb-3'
-                    style={{ border: '1px dashed #d4d5d9' }}
-                ></div>
-                <div className='col' style={{ fontWeight: 300 }}>
-                    {data.serviceList.map((item) => (
-                        <BillItems data={item} />
-                    ))}
-                </div>
-
-                <div className='col'>
-                    <div className='row justify-content-end'>
-                        <div
-                            className='col-md-auto text-right text-muted'
-                            style={{ borderTop: '2px solid #d4d5d9' }}
-                        >
-                            Total Paid: ₹{' '}
-                            {data.serviceList.reduce(
-                                (a, b) => a + b.qty * b.price,
-                                50,
-                            )}
-                        </div>
-                    </div>
-                </div>
-                <div className='col mb-4'>
-                    <div className='row ml-1'> 
-                        {showButtons(handleCancel)}
-                    </div>
-                </div>
-            </div>
-        </Wrapper>
-        )
-        }
-        else{
+        if(data.orderStatus == "rejected" || data.orderStatus == "reviewed"){
             return(
                 <Wrapper className='container text-left mb-5'>
             <div className='row p-4'>
-                <div className='col-3 pl-0'>
+                {/* <div className='col-3 pl-0'>
                     <Image src={data.garage.img_url} alt='Hotel' />
-                </div>
+                </div> */}
+                
+                <i class="fas fa-user col-1" style={{color:"#002D62" ,fontSize:"2rem",marginTop:"2px"}}></i>
                 <div className='col row-cols-1 pl-0'>
                     <div className='col'>
                         <div className='row justify-content-between'>
                             <div className='col-md-auto'>
-                                <Name>{data.garage.name}</Name>
-                            </div>
-                            <div className='col-md-auto text-right mt-1 text-muted'>
-                                {handleCancel}
-                                {showGarageStatus(handleCancel)}  
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col text-capitalize text-muted'>
-                        <Info>
-                            ORDER #{data._id} | {date.toString()}
-                        </Info>
-                    </div>
-                    <div className='col text-uppercase mt-3'>
-                        <Dets>view details</Dets>
-                    </div>
-                </div>
-            </div>
-            <div className='row-cols-1'>
-                <div
-                    className='col mt-3 mb-3'
-                    style={{ border: '1px dashed #d4d5d9' }}
-                ></div>
-                <div className='col' style={{ fontWeight: 300 }}>
-                    {data.serviceList.map((item) => (
-                        <BillItems data={item} />
-                    ))}
-                </div>
-
-                <div className='col'>
-                    <div className='row justify-content-end'>
-                        <div
-                            className='col-md-auto text-right text-muted'
-                            style={{ borderTop: '2px solid #d4d5d9' }}
-                        >
-                            Total Paid: ₹{' '}
-                            {data.serviceList.reduce(
-                                (a, b) => a + b.qty * b.price,
-                                50,
-                            )}
-                        </div>
-                    </div>
-                </div>
-                <div className='col mb-4'>
-                    <div className='row ml-1'> 
-                        {showButtons(handleCancel)}
-                    </div>
-                </div>
-            </div>
-        </Wrapper>
-            )}}
-            /* else{
-            return(
-                <Wrapper className='container text-left mb-5'>
-            <div className='row p-4'>
-                <div className='col-3 pl-0'>
-                    <Image src={data.garage.img_url} alt='Hotel' />
-                </div>
-                <div className='col row-cols-1 pl-0'>
-                    <div className='col'>
-                        <div className='row justify-content-between'>
-                            <div className='col-md-auto'>
-                                <Name>{data.garage.name}</Name>
+                            <span> <span style={{fontSize:"1.5rem"}}>{data.user.name}</span> | <i class="fas fa-phone-alt" style={{fontSize:"16px"}}></i> {data.user.phonenumber} | <i class="fas fa-envelope" style={{fontSize:"16px"}}></i> {data.user.email}</span> 
                             </div>
                             <div className='col-md-auto text-right mt-1 text-muted'>
                                 {data.orderStatus}
@@ -369,11 +208,11 @@ const OrderCard = (props) => {
                     </div>
                     <div className='col text-capitalize text-muted'>
                         <Info>
-                            ORDER #{data._id} | {date.toString()}
+                            ORDER #{data._id} | {data.createdAt}
                         </Info>
                     </div>
-                    <div className='col text-uppercase mt-3'>
-                        <Dets>view details</Dets>
+                    <div className='col mt-3'>
+                        {data.userAddress.flat_no} {", "} {data.userAddress.landmark} {", "}{data.userAddress.place_name}
                     </div>
                 </div>
             </div>
@@ -402,17 +241,90 @@ const OrderCard = (props) => {
                         </div>
                     </div>
                 </div>
+                <div
+                    className='col mt-3 mb-3'
+                    style={{ border: '1px dashed #d4d5d9' }}
+                ></div>
                 <div className='col mb-4'>
                     <div className='row ml-1'> 
-                        {showButtons(data.orderStatus)}
+                        {buttons(data.orderStatus)}
                     </div>
                 </div>
             </div>
         </Wrapper>
             )
-        } */
-    
-    return(
+        }
+        else{
+            return(
+                <Wrapper className='container text-left mb-5'>
+            <div className='row p-4'>
+                {/* <div className='col-3 pl-0'>
+                    <Image src={data.garage.img_url} alt='Hotel' />
+                </div> */}
+                
+                <i class="fas fa-user col-1" style={{color:"#002D62" ,fontSize:"2rem",marginTop:"2px"}}></i>
+                <div className='col row-cols-1 pl-0'>
+                    <div className='col'>
+                        <div className='row justify-content-between'>
+                            <div className='col-md-auto'>
+                            <span> <span style={{fontSize:"1.5rem"}}>{data.user.name}</span> | <i class="fas fa-phone-alt" style={{fontSize:"16px"}}></i> {data.user.phonenumber} | <i class="fas fa-envelope" style={{fontSize:"16px"}}></i> {data.user.email}</span> 
+                            </div>
+                            <div className='col-md-auto text-right mt-1 text-muted'>
+                                {handleCancel}
+                                {showGarageStatus(handleCancel)}  
+                            </div>
+                        </div>
+                    </div>
+                    <div className='col text-capitalize text-muted'>
+                        <Info>
+                            ORDER #{data._id} | {data.createdAt}
+                        </Info>
+                    </div>
+                    <div className='col mt-3'>
+                        {data.userAddress.flat_no} {", "} {data.userAddress.landmark} {", "}{data.userAddress.place_name}
+                    </div>
+                </div>
+            </div>
+            <div className='row-cols-1'>
+                <div
+                    className='col mt-3 mb-3'
+                    style={{ border: '1px dashed #d4d5d9' }}
+                ></div>
+                <div className='col' style={{ fontWeight: 300 }}>
+                    {data.serviceList.map((item) => (
+                        <BillItems data={item} />
+                    ))}
+                </div>
+
+                <div className='col'>
+                    <div className='row justify-content-end'>
+                        <div
+                            className='col-md-auto text-right text-muted'
+                            style={{ borderTop: '2px solid #d4d5d9' }}
+                        >
+                            Total Paid: ₹{' '}
+                            {data.serviceList.reduce(
+                                (a, b) => a + b.qty * b.price,
+                                50,
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <div
+                    className='col mt-3 mb-3'
+                    style={{ border: '1px dashed #d4d5d9' }}
+                ></div>
+                <div className='col mb-4'>
+                    <div className='row ml-1'> 
+                        {buttons(handleCancel)}
+                    </div>
+                </div>
+            </div>
+        </Wrapper>
+            )
+        }
+    }
+    return (
         showCard()
     );
 };
