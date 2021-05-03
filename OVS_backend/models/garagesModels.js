@@ -88,6 +88,8 @@ const garagesSchema = new mongoose.Schema(
     },
     img_url: {
       type: String,
+      default:
+        'https://c1.wallpaperflare.com/preview/379/459/604/garage-underground-store-closed.jpg',
     },
     ratingsQuantity: {
       type: Number,
